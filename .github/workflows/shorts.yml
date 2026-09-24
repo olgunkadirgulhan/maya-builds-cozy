@@ -1,0 +1,66 @@
+name: shorts
+on:
+  schedule:
+    # 3 videos/day at US viewing times (EDT). MAX_PER_DAY in run.py is the hard cap.
+    - cron: "0 13 * * *"   # 09:00 ET / 16:00 TR
+    - cron: "0 17 * * *"   # 13:00 ET / 20:00 TR
+    - cron: "0 23 * * *"   # 19:00 ET / 02:00 TR
+  workflow_dispatch:
+    inputs:
+      no_upload:
+        description: Render only, do not upload
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
+jobs:
+  make-and-upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
+      - run: pip install -r requirements.txt
+      - name: Run pipeline
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
+          YT_PRIVACY: ${{ vars.YT_PRIVACY }}
+          MAX_PER_DAY: ${{ vars.MAX_PER_DAY }}
+        run: python run.py ${{ inputs.no_upload && '--no-upload' || '' }}
+      - name: Keep video for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-${{ github.run_id }}
+          path: |
+            output/*/video.mp4
+            output/*/meta.json
+          retention-days: 5
+          if-no-files-found: ignore
+      - name: Commit log
+        if: always()
+        run: |
+          git config user.name "maya-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add history.json || true
+          git add -A queue/ || true
+          git add published.csv || true
+          git diff --cached --quiet && exit 0
+          git commit -m "short: $(date -u +%F-%H%M)"
+          git pull --rebase
+          git push
