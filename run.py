@@ -60,6 +60,9 @@ def enqueue(meta, error):
 def privacy_mode(no_upload):
     import upload
     if no_upload: return 'off'
+    if not upload.configured():
+        gh_annotation('warning', 'YouTube secrets missing: render only. Run auth_setup.py to connect the channel.')
+        return 'off'
     mode = (os.environ.get('YT_PRIVACY') or '').strip().lower()
     if mode not in ('public', 'private', 'unlisted', 'off'):
         mode = 'private' if upload.configured() else 'off'

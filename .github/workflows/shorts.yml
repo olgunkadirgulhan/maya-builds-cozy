@@ -26,8 +26,8 @@ jobs:
     env:
       PYTHONUTF8: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -44,7 +44,7 @@ jobs:
         run: python run.py ${{ inputs.no_upload && '--no-upload' || '' }}
       - name: Keep video for review
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: shorts-${{ github.run_id }}
           path: |
