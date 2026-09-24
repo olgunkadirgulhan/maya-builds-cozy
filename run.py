@@ -48,9 +48,10 @@ def record(meta, video_id, privacy):
                     'video_id': video_id, 'privacy': privacy, 'template': meta['template'],
                     'location': meta['location'], 'title': meta['title']})
 
-def enqueue(meta, error):
+def enqueue(meta, error, qpath=None):
+    """Kuyruktan gelen iş yine başarısız olursa aynı dosya güncellenir (kopya oluşmaz)."""
     QUEUE.mkdir(exist_ok=True)
-    p = QUEUE / f"{meta['id']}.json"
+    p = qpath or QUEUE / f"{meta['id']}.json"
     prev = json.loads(p.read_text(encoding='utf-8')) if p.exists() else {}
     sc = json.loads((Path(meta['dir']) / 'scenario.json').read_text(encoding='utf-8'))
     p.write_text(json.dumps({'scenario': sc, 'attempts': prev.get('attempts', 0) + 1,
@@ -117,9 +118,9 @@ def main():
         try:
             vid = upload.upload(Path(meta['dir']) / 'video.mp4', meta['title'], meta['description'], meta['yt_tags'], mode)
         except upload.QuotaError as e:
-            enqueue(meta, e); gh_annotation('warning', 'YouTube quota reached, video queued for the next run.'); break
+            enqueue(meta, e, qpath); gh_annotation('warning', 'YouTube quota reached, video queued for the next run.'); break
         except Exception as e:
-            traceback.print_exc(); enqueue(meta, e); gh_annotation('error', f"upload failed for {meta['id']}: {e}")
+            traceback.print_exc(); enqueue(meta, e, qpath); gh_annotation('error', f"upload failed for {meta['id']}: {e}")
             failed = True; continue
         record(meta, vid, mode)
         if qpath: qpath.unlink(missing_ok=True)
