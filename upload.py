@@ -5,7 +5,8 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
-SCOPES = ['https://www.googleapis.com/auth/youtube.upload', 'https://www.googleapis.com/auth/youtube.readonly']
+# tam 'youtube' izni: yükleme + oynatma listesi + kanal ayarları (channel_setup.py)
+SCOPES = ['https://www.googleapis.com/auth/youtube']
 
 
 class QuotaError(Exception):
@@ -18,9 +19,13 @@ def configured():
 
 def client():
     creds = Credentials(None, refresh_token=os.environ['YT_REFRESH_TOKEN'], client_id=os.environ['YT_CLIENT_ID'],
-                        client_secret=os.environ['YT_CLIENT_SECRET'], token_uri='https://oauth2.googleapis.com/token',
-                        scopes=SCOPES)
+                        client_secret=os.environ['YT_CLIENT_SECRET'], token_uri='https://oauth2.googleapis.com/token')
     return build('youtube', 'v3', credentials=creds, cache_discovery=False)
+
+
+def add_to_playlist(playlist_id, video_id):
+    client().playlistItems().insert(part='snippet', body={'snippet': {
+        'playlistId': playlist_id, 'resourceId': {'kind': 'youtube#video', 'videoId': video_id}}}).execute()
 
 
 def check_channel():

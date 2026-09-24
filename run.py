@@ -23,6 +23,7 @@ import generate  # noqa: E402
 PUBLISHED = HERE / 'published.csv'
 QUEUE = HERE / 'queue'
 OUT = HERE / 'output'
+PLAYLISTS = HERE / 'playlists.json'
 FIELDS = ['id', 'date_utc', 'video_id', 'privacy', 'template', 'location', 'title']
 
 
@@ -125,6 +126,14 @@ def main():
         record(meta, vid, mode)
         if qpath: qpath.unlink(missing_ok=True)
         log(f'uploaded https://youtube.com/shorts/{vid} ({mode})')
+        if mode == 'public':
+            pls = json.loads(PLAYLISTS.read_text(encoding='utf-8')) if PLAYLISTS.exists() else {}
+            for key in (meta['template'], 'loc_' + meta['location']):
+                if key in pls:
+                    try:
+                        upload.add_to_playlist(pls[key], vid); log(f'added to playlist {key}')
+                    except Exception as e:  # playlist hatası çalışmayı düşürmesin
+                        log(f'playlist add skipped ({key}): {str(e)[:160]}')
 
     sys.exit(1 if failed or locked else 0)
 
