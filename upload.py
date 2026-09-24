@@ -34,7 +34,14 @@ def check_channel():
     return f'{title} ({cid})'
 
 
+def clean(s):
+    """YouTube başlık/açıklamada < ve > kabul etmez."""
+    return s.replace('->', '→').replace('<', '').replace('>', '')
+
+
 def upload(mp4, title, description, tags, privacy, category='26'):
+    title, description = clean(title)[:100], clean(description)[:4900]
+    tags = [clean(t) for t in tags]
     body = {
         'snippet': {'title': title, 'description': description, 'tags': tags, 'categoryId': category},
         'status': {'privacyStatus': privacy, 'selfDeclaredMadeForKids': False, 'containsSyntheticMedia': False},

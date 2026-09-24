@@ -104,7 +104,7 @@ def build(rng, seed, template, cfg, hist, location=None):
     sc['title'] = f"{title} #diy #shorts"[:100]
     sc['hashtags'] = tags
     sc['description'] = "\n".join([
-        sc['hook_text'].replace('→', '->') + f" ({loc_name} edition).",
+        sc['hook_text'] + f" ({loc_name} edition).",
         T.PAYOFF.format(**fill),
         "",
         f"Finish: {finish[0]}" + (f" · Paint: {paint[0]}" if extra == paint[0] else "") +
