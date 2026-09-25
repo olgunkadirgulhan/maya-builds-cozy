@@ -1,10 +1,11 @@
 name: shorts
 on:
   schedule:
-    # 3 videos/day at US viewing times (EDT). MAX_PER_DAY in run.py is the hard cap.
-    - cron: "0 13 * * *"   # 09:00 ET / 16:00 TR
-    - cron: "0 17 * * *"   # 13:00 ET / 20:00 TR
-    - cron: "0 23 * * *"   # 19:00 ET / 02:00 TR
+    # 3 videos/day at US viewing times (EDT): slots 13:00, 17:00, 22:00 UTC (09/13/18 ET).
+    # GitHub delays or drops cron runs, so this fires hourly (off the busy :00 mark) and
+    # .github/slot_guard.py makes a video only when a slot is due and not yet uploaded.
+    # MAX_PER_DAY in run.py stays the hard cap.
+    - cron: "41 13-23 * * *"
   workflow_dispatch:
     inputs:
       no_upload:
@@ -20,7 +21,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  guard:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.g.outputs.go }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: g
+        env:
+          LOG_FILE: published.csv
+          SLOTS: "13:00,17:00,22:00"
+        run: python3 .github/slot_guard.py
+
   make-and-upload:
+    needs: guard
+    if: always() && (github.event_name != 'schedule' || needs.guard.outputs.go == '1')
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
