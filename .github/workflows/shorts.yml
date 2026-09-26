@@ -12,6 +12,10 @@ on:
         description: Render only, do not upload
         type: boolean
         default: false
+      auto:
+        description: External scheduler call - follow the slot plan like a scheduled run
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -22,7 +26,7 @@ concurrency:
 
 jobs:
   guard:
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' || inputs.auto
     runs-on: ubuntu-latest
     outputs:
       go: ${{ steps.g.outputs.go }}
@@ -36,7 +40,7 @@ jobs:
 
   make-and-upload:
     needs: guard
-    if: always() && (github.event_name != 'schedule' || needs.guard.outputs.go == '1')
+    if: always() && ((github.event_name != 'schedule' && !inputs.auto) || needs.guard.outputs.go == '1')
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
