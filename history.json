@@ -115,5 +115,14 @@
     "combo": "block_bench|balcony|dog:grey|espresso|sage|blush",
     "title": "I Built a Bench From Cinder Blocks (Dog Approved) #diy #shorts",
     "date": "2026-09-28"
+  },
+  {
+    "id": "20260928-2042-pallet_bed-40034",
+    "template": "pallet_bed",
+    "location": "living",
+    "pet": "cat",
+    "combo": "pallet_bed|living|cat:white|walnut|-|sage",
+    "title": "2 Old Pallets → My Cat's Dream Bed #diy #shorts",
+    "date": "2026-09-28"
   }
 ]
