@@ -124,5 +124,14 @@
     "combo": "pallet_bed|living|cat:white|walnut|-|sage",
     "title": "2 Old Pallets → My Cat's Dream Bed #diy #shorts",
     "date": "2026-09-28"
+  },
+  {
+    "id": "20260928-2216-crate_shelf-76331",
+    "template": "crate_shelf",
+    "location": "garage",
+    "pet": "cat",
+    "combo": "crate_shelf|garage|cat:white|charcoal|-|sky",
+    "title": "I Turned Old Crates Into a Bookshelf #diy #shorts",
+    "date": "2026-09-28"
   }
 ]
