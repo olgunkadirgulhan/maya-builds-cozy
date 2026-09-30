@@ -178,5 +178,14 @@
     "combo": "pallet_bed|garage|cat:grey tabby|charcoal|-|sage",
     "title": "2 Old Pallets → My Cat's Dream Bed #diy #shorts",
     "date": "2026-09-30"
+  },
+  {
+    "id": "20260930-2242-crate_shelf-30332",
+    "template": "crate_shelf",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "crate_shelf|balcony|cat:orange tabby|charcoal|-|sky",
+    "title": "Wooden Crates Into a Cozy Shelf (Cat Approved) #diy #shorts",
+    "date": "2026-09-30"
   }
 ]
