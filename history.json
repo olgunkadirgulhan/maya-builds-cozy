@@ -232,5 +232,14 @@
     "combo": "pallet_bed|garage|cat:white|charcoal|-|greige",
     "title": "2 Old Pallets → My Cat's Dream Bed #diy #shorts",
     "date": "2026-10-02"
+  },
+  {
+    "id": "20261002-2241-crate_shelf-62108",
+    "template": "crate_shelf",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "crate_shelf|balcony|cat:grey tabby|walnut|-|cream",
+    "title": "6 Old Crates → Dream Bookshelf #diy #shorts",
+    "date": "2026-10-02"
   }
 ]
