@@ -95,13 +95,17 @@ def build(rng, seed, template, cfg, hist, location=None):
               string_lights=rng.random() < 0.7, handle=cfg.get('handle', '@mayabuildscozy'),
               music=dict(prog=rng.choice(PROGS), tempo=rng.randint(76, 92), transpose=rng.randint(-2, 2)),
               cta=rng.choice(CTAS))
-    fill = dict(pet=pet_kind, Pet=pet_kind.capitalize(), paint=paint[0], Paint=paint[0].title())
-    sc['hook_text'] = rng.choice(T.HOOKS).format(**fill)
-    title = rng.choice(T.TITLES).format(**fill)
     loc_name, loc_tags = LOC[loc]
+    fill = dict(pet=pet_kind, Pet=pet_kind.capitalize(), paint=paint[0], Paint=paint[0].title(),
+                Place=loc_name.title(), Finish=finish[0].title(), Rope=rope[0].title())
+    sc['hook_text'] = rng.choice(T.HOOKS).format(**fill)
+    # Kanalda kullanılmış başlık tekrar edilmez (aynı başlık = tekrarlayan içerik sinyali)
+    used_titles = {h.get('title') for h in hist}
+    titles = [f"{t.format(**fill)} #diy #shorts"[:100] for t in T.TITLES]
+    title = rng.choice([t for t in titles if t not in used_titles] or titles)
     tags = ['#shorts', '#diy', '#beforeandafter'] + rng.sample(T.TAGS, 3) + rng.sample(loc_tags, 2) + \
            rng.sample(PET_TAGS[pet_kind], 1) + rng.sample(BASE_TAGS, 3)
-    sc['title'] = f"{title} #diy #shorts"[:100]
+    sc['title'] = title
     sc['hashtags'] = tags
     sc['description'] = "\n".join([
         sc['hook_text'] + f" ({loc_name} edition).",

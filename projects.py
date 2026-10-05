@@ -106,7 +106,11 @@ class PalletBed:
 
     HOOKS = ["2 old pallets → {pet}'s dream bed", "Free pallets → cozy {pet} bed", "2 pallets → {pet} heaven"]
     TITLES = ["2 Old Pallets → My {Pet}'s Dream Bed", "I Turned Free Pallets Into a Cozy {Pet} Bed",
-              "Pallet {Pet} Bed With LED Glow", "From Trash Pallets to {Pet} Bed Glow-Up"]
+              "Pallet {Pet} Bed With LED Glow", "From Trash Pallets to {Pet} Bed Glow-Up",
+              "My {Pet} Needed a Bed, So I Used Free Pallets", "Building a {Place} {Pet} Bed From Old Pallets",
+              "Pallet Bed My {Pet} Refuses to Leave", "Sanding, Staining, Glowing: Pallet {Pet} Bed",
+              "Cozy {Place} Corner: DIY Pallet {Pet} Bed", "The Easiest Pallet Project for {Pet} Owners",
+              "Free Pallet → {Finish} {Pet} Bed", "Would Your {Pet} Sleep Here? Pallet Bed Build"]
     PAYOFF = "The {pet} claimed it in 3 seconds."
     TAGS = ['#palletproject', '#palletfurniture', '#palletbed', '#woodworking', '#reclaimedwood', '#petbed']
 
@@ -246,7 +250,11 @@ class BlockBench:
 
     HOOKS = ["6 cinder blocks → cozy bench", "Grey blocks → {paint} bench", "$15 of cinder blocks → Pinterest bench"]
     TITLES = ["6 Cinder Blocks → Cozy Succulent Bench", "Cheap Cinder Blocks Into a Pinterest Bench",
-              "Grey Blocks → {Paint} Bench Glow-Up", "I Built a Bench From Cinder Blocks ({Pet} Approved)"]
+              "Grey Blocks → {Paint} Bench Glow-Up", "I Built a Bench From Cinder Blocks ({Pet} Approved)",
+              "Cinder Block {Place} Bench, Start to Finish", "{Paint} Cinder Block Bench With Succulents",
+              "Cinder Blocks + Succulents = Best {Place} Seat", "Turning Cheap Blocks Into a {Place} Lounge",
+              "The Block Bench My {Pet} Took Over", "Painted Block Bench: {Paint} Edition",
+              "Plain Grey Blocks to Cozy {Place} Bench", "Would You Sit Here? Cinder Block Bench Build"]
     PAYOFF = "Succulents in every hole, and the {pet} took the best seat."
     TAGS = ['#cinderblock', '#cinderblockbench', '#concretediy', '#succulents', '#gardenideas', '#benchdiy']
 
@@ -368,8 +376,12 @@ class CrateShelf:
                [('drill', a, b) for a, b in self.DRILL] + [('brush', 17.15, 19.35), ('led', 19.6)]
 
     HOOKS = ["6 old crates → dream shelf", "Market crates → cozy bookshelf", "6 crates → {pet}'s favorite shelf"]
-    TITLES = ["6 Old Crates → Dream Bookshelf", "Wooden Crates Into a Cozy Shelf (Cat Approved)",
-              "Crate Shelf Glow-Up With Hidden LEDs", "I Turned Old Crates Into a Bookshelf"]
+    TITLES = ["6 Old Crates → Dream Bookshelf", "Wooden Crates Into a Cozy Shelf ({Pet} Approved)",
+              "Crate Shelf Glow-Up With Hidden LEDs", "I Turned Old Crates Into a Bookshelf",
+              "{Finish} Crate Bookshelf for a Tiny {Place}", "Stacking Old Crates Into a Cozy Library",
+              "Stacked Crates → {Place} Shelf", "The Crate Shelf My {Pet} Moved Into",
+              "Budget Bookshelf From 6 Wooden Crates", "Small Space Hack: Stacked Crate Shelf",
+              "Old Crates → Glowing Bookshelf", "Would You Put This Crate Shelf in Your {Place}?"]
     PAYOFF = "The {pet} moved into the bottom cubby immediately."
     TAGS = ['#woodencrates', '#crateshelf', '#shelfideas', '#smallspaceideas', '#bookshelf', '#upcycledfurniture']
 
@@ -504,7 +516,11 @@ class TireOttoman:
 
     HOOKS = ["2 old tires → cozy rope pouf", "Junk tires → Pinterest ottoman", "Free tires → {pet}'s new throne"]
     TITLES = ["2 Old Tires → Cozy Rope Ottoman", "I Turned Junk Tires Into a Pinterest Pouf",
-              "Tire + Rope = My {Pet}'s New Favorite Seat", "Old Tire Ottoman Glow-Up"]
+              "Tire + Rope = My {Pet}'s New Favorite Seat", "Old Tire Ottoman Glow-Up",
+              "{Rope} Rope Ottoman From a Junk Tire", "Nobody Believes This Pouf Was a Tire",
+              "Wrapping an Old Tire in {Rope} Rope", "Old Tire → {Place} Ottoman",
+              "The Tire Ottoman My {Pet} Won't Share", "Boho Pouf (It's Secretly a Tire)",
+              "Old Tire, New Seat: {Rope} Rope Pouf", "Would You Guess This Was a Tire?"]
     PAYOFF = "The {pet} fell asleep on it before the glue dried."
     TAGS = ['#tirecraft', '#upcycledtires', '#ropecraft', '#ottoman', '#poufdiy', '#recycledcrafts']
 
@@ -629,7 +645,11 @@ class LadderShelf:
 
     HOOKS = ["Old ladder → cozy plant shelf", "$0 ladder → Pinterest shelf", "Dusty ladder → {pet}'s lookout"]
     TITLES = ["Old Ladder → Cozy Plant Shelf", "I Turned a Dusty Ladder Into a Plant Shelf",
-              "Ladder Shelf Glow-Up With Hidden LEDs", "Free Ladder → {Pet}-Approved Plant Shelf"]
+              "Ladder Shelf Glow-Up With Hidden LEDs", "Free Ladder → {Pet}-Approved Plant Shelf",
+              "Old Ladder Plant Stand for a Small {Place}", "Giving an Old Ladder a Second Life",
+              "Ladder + 3 Planks = Cozy Plant Corner", "{Finish} Ladder Shelf Full of Plants",
+              "The Plant Shelf My {Pet} Naps Under", "Rustic Ladder Shelf From a Free Ladder",
+              "Turning an Old Ladder Into Decor", "Would You Keep This Ladder Shelf in Your {Place}?"]
     PAYOFF = "The {pet} claimed the bottom shelf."
     TAGS = ['#laddershelf', '#plantshelf', '#plantlover', '#reclaimedwood', '#shelfideas', '#upcycledfurniture']
 
@@ -792,7 +812,11 @@ class ConcretePlanters:
 
     HOOKS = ["Old buckets → concrete planters", "$5 of concrete → designer planters", "Buckets + concrete → plant heaven"]
     TITLES = ["Old Buckets → Designer Concrete Planters", "DIY Concrete Planters That Look Expensive",
-              "I Made Concrete Planters With Old Buckets", "Concrete Planters Glow-Up ({Paint} Dip)"]
+              "I Made Concrete Planters With Old Buckets", "Concrete Planters Glow-Up ({Paint} Dip)",
+              "{Paint} Dipped Concrete Pots From Buckets", "Bucket Molds → Modern {Place} Planters",
+              "Pouring Concrete Planters at Home", "3 Concrete Planters From Old Buckets",
+              "Minimal Concrete Pots My {Pet} Approves", "Cheap Buckets, Designer Planters",
+              "Concrete Planter Trio for a {Place} Makeover", "Store-Bought or DIY? Concrete Planters"]
     PAYOFF = "Three planters, one very relaxed {pet}."
     TAGS = ['#concreteplanter', '#concretediy', '#plantlover', '#houseplants', '#planterdiy', '#cementcraft']
 

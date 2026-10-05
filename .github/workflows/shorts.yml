@@ -37,7 +37,8 @@ jobs:
       - id: g
         env:
           LOG_FILE: published.csv
-          SLOTS: "16:00,20:00,22:00"
+          # 6 proje var: günde 3 video aynı projeleri 2 günde bir tekrarlıyordu; yeni projeler eklenene kadar günde 1
+          SLOTS: "20:00"
         run: python3 .github/slot_guard.py
 
   make-and-upload:
