@@ -1078,13 +1078,25 @@ class Video:
         _cache['paybg'] = (img, rest)
         return _cache['paybg']
 
-    def seg_payoff(self, lt):
+    def seg_payoff(self, lt, plain=False):
         bg, rest = self.payoff_bg()
         img = bg.copy()
         d = ImageDraw.Draw(img, 'RGBA')
         draw_motes(img, lt + 22, col=(255, 225, 170))
         pet = self.sc['pet']
         rx, ry, rs = rest
+        if self.sc.get('payoff_style') == 'reveal' and not plain:  # evcil hayvansız bitiş: köşede ÖNCE fotoğrafı
+            if ('before_inset', self.sc['seed']) not in _cache:
+                b = self.seg_stakes(1.5).resize((W // 4, H // 4))
+                fr = Image.new('RGB', (b.width + 16, b.height + 16), (255, 255, 255)); fr.paste(b, (8, 8))
+                _cache[('before_inset', self.sc['seed'])] = fr
+            if lt > 1.0:
+                fr = _cache[('before_inset', self.sc['seed'])]; k = ease_out((lt - 1.0) / 0.5)
+                x = int(lerp(W, W - fr.width - 40, k))
+                img.paste(fr, (x, 720))
+                tag(img, "BEFORE", (x + 24, 760), 26)
+                if lt > 1.6: tag(img, "AFTER", (70, 1480))
+            return zoom(img, lerp(1.0, 1.08, ease(lt / 7.0)), (560, ry))
         if lt < 2.4:
             draw_pet_walk(img, pet, lerp(1260, 780, lt / 2.4), 1690, 1.0, lt)
         elif lt < 3.0:
@@ -1109,9 +1121,17 @@ class Video:
         return zoom(img, lerp(1.0, 1.12, ease(lt / 7.0)), (560, ry))
 
     def seg_hook(self, lt):
+        style = self.sc.get('hook_style', 'split')
+        if style in ('guess', 'budget'):
+            img = self.seg_stakes(1.5 + lt * 0.3)
+            txt = "Guess what this becomes 👀" if style == 'guess' else self.sc['hook_text']
+            if lt > 0.15:
+                img = text_pill(img, txt.replace('👀', '').strip() + ('?' if style == 'guess' else ''), 300, 62,
+                                alpha=ease((lt - 0.15) / 0.25))
+            return img
         if 'hook' not in _cache:
             _cache['hook'] = (self.seg_stakes(1.5).crop((0, 820, W, 1780)),
-                              self.seg_payoff(5.2).crop((0, 820, W, 1780)))
+                              self.seg_payoff(5.2, plain=True).crop((0, 820, W, 1780)))
         top, bot = _cache['hook']
         img = Image.new('RGB', (W, H), (20, 14, 10))
         img.paste(top, (int(-W * (1 - ease_out(lt / 0.3))), 0))

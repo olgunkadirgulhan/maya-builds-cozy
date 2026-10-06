@@ -7,7 +7,7 @@ history.json'daki kombinasyonlar tekrar edilmez; art arda aynı şablon ya da ay
   python generate.py --template block_bench --location garden --seed 42
   python generate.py --preview 1,9,20,27   -> sadece önizleme PNG'leri
 """
-import argparse, datetime, json, os, random
+import argparse, csv, datetime, json, os, random, re
 from engine import Video, PALETTES, H_
 from projects import TEMPLATES
 
@@ -99,20 +99,34 @@ def build(rng, seed, template, cfg, hist, location=None):
     fill = dict(pet=pet_kind, Pet=pet_kind.capitalize(), paint=paint[0], Paint=paint[0].title(),
                 Place=loc_name.title(), Finish=finish[0].title(), Rope=rope[0].title())
     sc['hook_text'] = rng.choice(T.HOOKS).format(**fill)
-    # Kanalda kullanılmış başlık tekrar edilmez (aynı başlık = tekrarlayan içerik sinyali)
+    # Yapı çeşitliliği (para kazanma: "aynı durum, aynı sonuç" şablon sinyali olmasın):
+    # 3 farklı açılış, bitişlerin bir kısmında evcil hayvan yok (önce/sonra karşılaştırması)
+    last = hist[-1] if hist else {}
+    sc['hook_style'] = rng.choice([h for h in ('split', 'guess', 'budget') if h != last.get('hook_style')])
+    sc['payoff_style'] = 'reveal' if (last.get('payoff_style') == 'pet' and rng.random() < 0.6) else \
+        ('pet' if last.get('payoff_style') == 'reveal' else rng.choice(['pet', 'reveal']))
+    with_pet = sc['payoff_style'] == 'pet'
+    # Kanalda kullanılmış başlık tekrar edilmez (history + published.csv; kuyruktan tekrar yükleme dahil)
     used_titles = {h.get('title') for h in hist}
-    titles = [f"{t.format(**fill)} #diy #shorts"[:100] for t in T.TITLES]
+    pub = os.path.join(HERE, 'published.csv')
+    if os.path.exists(pub):
+        with open(pub, newline='', encoding='utf-8') as f: used_titles |= {r.get('title') for r in csv.DictReader(f)}
+    def third_person(t):  # çizim karakter: "I built" yerine "Maya built"
+        t = re.sub(r"\bI (Turned|Built|Made|Used)\b", r"Maya \1", t)
+        return re.sub(r"\bMy\b", "Maya's", t)
+    pool = [t for t in T.TITLES if with_pet or '{Pet}' not in t and '{pet}' not in t] or T.TITLES
+    titles = [f"{third_person(t.format(**fill))} #diy #shorts"[:100] for t in pool]
     title = rng.choice([t for t in titles if t not in used_titles] or titles)
     tags = ['#shorts', '#diy', '#beforeandafter'] + rng.sample(T.TAGS, 3) + rng.sample(loc_tags, 2) + \
-           rng.sample(PET_TAGS[pet_kind], 1) + rng.sample(BASE_TAGS, 3)
+           (rng.sample(PET_TAGS[pet_kind], 1) if with_pet else []) + rng.sample(BASE_TAGS, 3)
     sc['title'] = title
     sc['hashtags'] = tags
     sc['description'] = "\n".join([
         sc['hook_text'] + f" ({loc_name} edition).",
-        T.PAYOFF.format(**fill),
+        T.PAYOFF.format(**fill) if with_pet else f"Same {loc_name}, completely new corner.",
         "",
         f"Finish: {finish[0]}" + (f" · Paint: {paint[0]}" if extra == paint[0] else "") +
-        (f" · Rope: {rope[0]}" if template == 'tire_ottoman' else "") + f" · Resident: {pet['name']} {pet_kind}",
+        (f" · Rope: {rope[0]}" if template == 'tire_ottoman' else "") + (f" · Resident: {pet['name']} {pet_kind}" if with_pet else ""),
         "",
         sc['cta'] + " 👇",
         "New cozy build every day. Subscribe to Maya Builds Cozy!",
@@ -153,7 +167,7 @@ def make(out_root, hist, seed=None, template=None, location=None, record=True, s
     with open(os.path.join(od, 'meta.json'), 'w', encoding='utf-8') as f: json.dump(meta, f, ensure_ascii=False, indent=2)
     if record:
         hist.append(dict(id=vid, template=template, location=sc['location'], pet=sc['pet']['kind'], combo=sc['combo'],
-                         title=sc['title'], date=f"{datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d}"))
+                         title=sc['title'], hook_style=sc.get('hook_style'), payoff_style=sc.get('payoff_style'), date=f"{datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d}"))
         save_hist(hist)
     return meta
 
