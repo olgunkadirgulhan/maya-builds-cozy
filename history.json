@@ -277,5 +277,16 @@
     "combo": "block_bench|garden|dog:black|walnut|dusty blue|sky",
     "title": "I Built a Bench From Cinder Blocks (Dog Approved) #diy #shorts",
     "date": "2026-10-05"
+  },
+  {
+    "id": "20261006-2043-spool_table-41850",
+    "template": "spool_table",
+    "location": "living",
+    "pet": "cat",
+    "combo": "spool_table|living|cat:orange tabby|charcoal|-|blush",
+    "title": "Blush Spool Table, Start to Finish #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "reveal",
+    "date": "2026-10-06"
   }
 ]
