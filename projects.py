@@ -1,5 +1,5 @@
 """
-Proje şablonları. Her şablon aynı 28 sn iskeleti doldurur:
+Proje şablonları (10 adet). Her şablon aynı 28 sn iskeleti doldurur:
 anchor_static / draw_item (Maya'nın taşıdığı parça) / stakes / proc_a / proc_b / proc_c / cu1 / cu2 / payoff_objects / sfx
 Yeni fikir eklemek = buraya yeni bir sınıf yazıp TEMPLATES'e eklemek.
 """
@@ -821,4 +821,437 @@ class ConcretePlanters:
     TAGS = ['#concreteplanter', '#concretediy', '#plantlover', '#houseplants', '#planterdiy', '#cementcraft']
 
 
-TEMPLATES = {c.key: c for c in (PalletBed, BlockBench, CrateShelf, TireOttoman, LadderShelf, ConcretePlanters)}
+# ================================================================ ortak: evcil hayvan minderi (nesnenin önünde)
+def floor_cushion(img, cx, cy, col, w=230):
+    d = ImageDraw.Draw(img, 'RGBA'); col = H_(col)
+    d.ellipse((cx - w / 2 - 6, cy - 16, cx + w / 2 + 6, cy + 30), fill=(40, 25, 15, 60))
+    d.ellipse((cx - w / 2, cy - 40, cx + w / 2, cy + 22), fill=shade(col, 0.86))
+    d.ellipse((cx - w / 2 + 14, cy - 46, cx + w / 2 - 14, cy + 6), fill=col)
+
+
+def hammer_swing(t, t0, per):
+    u = ((t - t0) % per) / per if t >= t0 else 0.6
+    ang = lerp(40, 165, ease(u / 0.7)) if u < 0.7 else lerp(165, 40, (u - 0.7) / 0.3)
+    return u, ang
+
+
+# ================================================================ 7) MAKARA SEHPA (kablo makarası)
+def draw_spool(img, cx, by, col, core=None, top=None, casters=False):
+    d = ImageDraw.Draw(img, 'RGBA')
+    core = core or shade(col, 0.85); top = top or col
+    lift = 22 if casters else 0
+    by = by - lift
+    d.ellipse((cx - 230, by - 14, cx + 230, by + 20 + lift), fill=(40, 25, 15, 60))
+    if casters:
+        for x in (cx - 150, cx, cx + 150):
+            d.rectangle((x - 8, by, x + 8, by + 10), fill=H_('3E3E3E')); circ(d, (x, by + 14), 10, H_('2B2B2B'))
+    d.rounded_rectangle((cx - 210, by - 46, cx + 210, by), radius=10, fill=shade(col, 0.8))
+    d.ellipse((cx - 210, by - 66, cx + 210, by - 26), fill=col)
+    d.rectangle((cx - 105, by - 250, cx + 105, by - 46), fill=core)
+    for k in range(6):
+        x = cx - 95 + k * 38; d.line([(x, by - 248), (x, by - 48)], fill=shade(core, 0.86), width=3)
+    d.rounded_rectangle((cx - 220, by - 290, cx + 220, by - 250), radius=10, fill=shade(top, 0.8))
+    d.ellipse((cx - 220, by - 318, cx + 220, by - 266), fill=top)
+    grain(d, cx - 170, by - 308, cx + 170, by - 276, top, 5, 3)
+    circ(d, (cx, by - 292), 22, shade(top, 0.6))
+    return by - 292
+
+def draw_spool_side(img, cx, by, col):
+    d = ImageDraw.Draw(img, 'RGBA')
+    d.ellipse((cx - 150, by - 300, cx + 150, by), fill=shade(col, 0.82))
+    d.ellipse((cx - 135, by - 285, cx + 135, by - 15), fill=col)
+    circ(d, (cx, by - 150), 60, shade(col, 0.6)); circ(d, (cx, by - 150), 22, shade(col, 0.35))
+    for a in range(0, 360, 60):
+        r = math.radians(a)
+        d.line([(cx + 60 * math.cos(r), by - 150 + 60 * math.sin(r)), (cx + 130 * math.cos(r), by - 150 + 130 * math.sin(r))],
+               fill=shade(col, 0.72), width=4)
+
+class SpoolTable:
+    key = 'spool_table'
+    locations = ['living', 'balcony', 'garden']
+    pets = ['dog', 'cat']
+    plant_front = False
+    led_floor = None
+    anchor_stop_x, carry_dx, carry_dy = 260, 150, 150
+    item_final = (560, 1660)
+    DRILL = [(14.4, 15.1), (15.6, 16.3)]
+
+    def __init__(self, sc):
+        self.sc = sc
+        self.fin = H_(sc['finish'][1]); self.paint = H_(sc['paint'][1])
+        self.can_col, self.can_label = self.paint, 'PAINT'
+
+    def draw_item(self, img, cx, by): draw_spool_side(img, cx, by + 120, RAW)
+    def anchor_static(self, img): pass
+
+    def stakes(self, img, lt):
+        draw_spool(img, 560, 1640, RAW)
+        maya_think(img, 150, 1600, lt)
+
+    def proc_a(self, img, lt):
+        col = mix(RAW, SANDED, ease(lt / 2.8))
+        draw_spool(img, 560, 1640, col)
+        ph = lt * 2 * math.pi * 2.2
+        info = draw_maya(img, 170, 1600, pose='stand', t=lt, smile=0.2,
+                         arms=(40, 70, 62 + 10 * math.sin(ph), 58 + 12 * math.sin(ph)), lean=8)
+        dust(img, lt, tool_sander(img, info), rate=50, life=1.0, seed=7)
+
+    def proc_b(self, img, lt):
+        draw_spool(img, 560, 1640, SANDED, core=mix(SANDED, self.paint, ease(lt / 2.8)))
+        ph = lt * 2 * math.pi * 1.6
+        info = draw_maya(img, 930, 1600, f=-1, pose='kneel', t=lt, smile=0.3,
+                         arms=(40, 60, 70 + 18 * math.sin(ph), 95 + 22 * math.sin(ph)))
+        tool_roller(img, info, self.paint, f=-1)
+
+    def proc_c(self, img, lt):
+        t = 14 + lt
+        draw_spool(img, 560, 1640, SANDED, core=self.paint, casters=lt > 1.4)
+        drilling = any(a <= t < b for a, b in self.DRILL)
+        info = draw_maya(img, 960, 1590, f=-1, pose='kneel_drill', t=lt, smile=0.2)
+        j = random.Random(int(t * 60)).uniform(-3, 3) if drilling else 0
+        tip = tool_drill(img, info, f=-1, jitter=j)
+        if drilling: dust(img, (t - 14.4) % 1.0, tip, rate=60, life=0.7, seed=int(t) + 20, col=(230, 205, 160), spread=0.8)
+
+    def cu1(self, lt): return cu_roller(lt, SANDED, self.paint)
+    def cu2(self, lt): return cu_brush(lt, SANDED, self.fin)
+
+    def payoff_objects(self, img):
+        ty = draw_spool(img, 560, 1640, self.fin, core=self.paint, top=self.fin, casters=True)
+        d = ImageDraw.Draw(img, 'RGBA')
+        draw_plant_pot(img, 470, ty + 10, s=0.42, pot=H_(self.sc['pot']), seed=31)
+        r = random.Random(6); x = 560
+        for k in range(3):
+            w = r.randint(120, 160); d.rectangle((x, ty - 22 * (k + 1), x + w, ty - 22 * k), fill=H_(r.choice(BOOKS)))
+        mug = H_(self.sc['mug'])
+        d.rounded_rectangle((600, ty - 110, 640, ty - 66), radius=6, fill=mug)
+        floor_cushion(img, 860, 1730, self.sc['cushion'], 200)
+        return (860, 1700, 0.8)
+
+    def sfx(self):
+        return [('drop_heavy', 4.72), ('sand', 8.0, 11.0), ('roller', 11.1, 13.9)] + \
+               [('drill', a, b) for a, b in self.DRILL] + [('roller', 17.15, 19.35), ('brush', 19.6, 21.8)]
+
+    HOOKS = ["Free cable spool → side table", "Old spool → cozy coffee table", "Junk spool → {Paint} side table"]
+    TITLES = ["Free Cable Spool → Cozy Side Table", "Old Wooden Spool Into a {Paint} Coffee Table",
+              "Cable Spool Table Glow-Up", "Junk Spool → {Place} Side Table", "Wooden Spool Table on Wheels",
+              "Nobody Believes This Table Was a Cable Spool", "{Paint} Spool Table, Start to Finish",
+              "The Spool Table Next to the {Pet}'s Cushion", "Would You Put This Spool Table in Your {Place}?",
+              "Industrial Spool → Boho Side Table"]
+    PAYOFF = "The {pet} took the cushion next to the new table."
+    TAGS = ['#spooltable', '#cablespool', '#upcycledfurniture', '#coffeetable', '#rollertable', '#reclaimedwood']
+
+
+# ================================================================ 8) KAPIDAN PORTMANTO
+DR = (380, 700, 700, 1590)
+
+def draw_door(img, r, col, hooks=0, shelf=None, led=None, coats=False):
+    d = ImageDraw.Draw(img, 'RGBA')
+    x0, y0, x1, y1 = r
+    d.polygon([(x1, y0 + 12), (x1 + 26, y0 + 26), (x1 + 26, y1), (x1, y1)], fill=(40, 25, 15, 50))
+    d.rectangle(r, fill=col)
+    d.rectangle((x0, y0, x1, y0 + 8), fill=shade(col, 1.12))
+    for py0, py1 in ((y0 + 60, y0 + 380), (y0 + 430, y1 - 60)):
+        for px0, px1 in ((x0 + 36, (x0 + x1) / 2 - 12), ((x0 + x1) / 2 + 12, x1 - 36)):
+            d.rectangle((px0, py0, px1, py1), fill=shade(col, 0.86))
+            d.rectangle((px0 + 10, py0 + 10, px1 - 10, py1 - 10), fill=shade(col, 0.95))
+    circ(d, (x1 - 30, (y0 + y1) / 2 + 40), 12, H_('C9A44A'))
+    hy = y0 + 400
+    for k in range(hooks):
+        hx = lerp(x0 + 50, x1 - 50, k / 3)
+        d.rectangle((hx - 6, hy - 10, hx + 6, hy + 8), fill=H_('3E3E3E'))
+        d.arc((hx - 4, hy, hx + 22, hy + 30), 0, 200, fill=H_('3E3E3E'), width=5)
+    if shelf is not None:
+        d.polygon([(x0 - 30, y0 + 20), (x1 + 30, y0 + 20), (x1 + 55, y0 - 6), (x0 - 5, y0 - 6)], fill=shelf)
+        d.rectangle((x0 - 30, y0 + 20, x1 + 30, y0 + 44), fill=shade(shelf, 0.82))
+        if led:
+            for k, a in ((30, 40), (14, 90), (4, 220)):
+                d.rectangle((x0 - 20, y0 + 44, x1 + 20, y0 + 44 + k), fill=tuple(led) + (a,))
+    if coats:
+        pal = [H_('B8664A'), H_('3F4E6B'), H_('D9A441')]
+        for k in range(min(hooks, 3)):
+            hx = lerp(x0 + 50, x1 - 50, k / 3) + 10
+            if k == 1:
+                d.rounded_rectangle((hx - 50, hy + 20, hx + 50, hy + 150), radius=18, fill=pal[k])
+                d.arc((hx - 30, hy - 10, hx + 30, hy + 50), 180, 360, fill=pal[k], width=8)
+            else:
+                d.polygon([(hx - 20, hy + 20), (hx + 20, hy + 20), (hx + 70, hy + 330), (hx - 70, hy + 330)], fill=pal[k])
+
+def draw_door_flat(img, cx, by, col):
+    d = ImageDraw.Draw(img, 'RGBA')
+    d.ellipse((cx - 330, by - 10, cx + 330, by + 16), fill=(40, 25, 15, 60))
+    d.polygon([(cx - 310, by - 34), (cx + 310, by - 34), (cx + 340, by - 70), (cx - 280, by - 70)], fill=col)
+    d.rectangle((cx - 310, by - 34, cx + 310, by), fill=shade(col, 0.8))
+    for k in (-1, 1): d.rectangle((cx + k * 150 - 120, by - 64, cx + k * 150 + 110, by - 40), fill=shade(col, 0.88))
+
+class DoorCoatRack:
+    key = 'door_rack'
+    locations = ['living', 'garage']
+    pets = ['dog', 'cat']
+    plant_front = True
+    led_floor = None
+    anchor_stop_x, carry_dx, carry_dy = 200, 140, 40
+    item_final = (620, 1680)
+    HAM0, HAMP = 11.3, 0.3
+    DRILL = [(14.3, 15.0), (15.5, 16.4)]
+
+    def __init__(self, sc):
+        self.sc = sc
+        self.fin = H_(sc['finish'][1]); self.paint = H_(sc['paint'][1])
+        self.can_col, self.can_label = self.paint, 'PAINT'
+
+    def draw_item(self, img, cx, by): draw_door_flat(img, cx, by, RAW)
+    def anchor_static(self, img): pass
+
+    def stakes(self, img, lt):
+        draw_door(img, DR, RAW)
+        maya_think(img, 150, 1600, lt)
+
+    def proc_a(self, img, lt):
+        draw_door(img, DR, mix(RAW, SANDED, ease(lt / 2.8)))
+        ph = lt * 2 * math.pi * 2.2
+        info = draw_maya(img, 180, 1600, pose='stand', t=lt, smile=0.2,
+                         arms=(40, 70, 62 + 10 * math.sin(ph), 58 + 12 * math.sin(ph)), lean=8)
+        dust(img, lt, tool_sander(img, info), rate=50, life=1.0, seed=7)
+
+    def proc_b(self, img, lt):
+        t = 11 + lt
+        draw_door(img, DR, SANDED, hooks=min(4, 1 + int(lt * 1.4)))
+        u, ang = hammer_swing(t, self.HAM0, self.HAMP)
+        info = draw_maya(img, 900, 1600, f=-1, pose='stand', t=lt, smile=0.2, arms=(95, 100, ang, ang + 25), lean=6)
+        hend = tool_hammer(img, info, ang)
+        if u < 0.12 and t >= self.HAM0: circ(ImageDraw.Draw(img, 'RGBA'), hend, 28, (255, 240, 200, 110))
+
+    def proc_c(self, img, lt):
+        t = 14 + lt
+        draw_door(img, DR, SANDED, hooks=4, shelf=self.fin if lt > 0.3 else None)
+        drilling = any(a <= t < b for a, b in self.DRILL)
+        info = draw_maya(img, 930, 1590, f=-1, pose='kneel_drill', t=lt, smile=0.2)
+        j = random.Random(int(t * 60)).uniform(-3, 3) if drilling else 0
+        tip = tool_drill(img, info, f=-1, jitter=j)
+        if drilling: dust(img, (t - 14.3) % 1.0, tip, rate=60, life=0.7, seed=int(t) + 20, col=(230, 205, 160), spread=0.8)
+
+    def cu1(self, lt): return cu_roller(lt, SANDED, self.paint)
+    def cu2(self, lt): return cu_led(lt, self.fin, tuple(self.sc['led']))
+
+    def payoff_objects(self, img):
+        draw_door(img, DR, self.paint, hooks=4, shelf=self.fin, led=self.sc['led'], coats=True)
+        d = ImageDraw.Draw(img, 'RGBA')
+        draw_succulent(d, 450, DR[1] - 30, 30, ys=0.6)
+        d.rounded_rectangle((420, DR[1] - 34, 480, DR[1] - 4), radius=6, fill=H_(self.sc['pot']))
+        r = random.Random(3); x = 560
+        for _ in range(4):
+            w = r.randint(16, 22); h = r.randint(56, 80)
+            d.rectangle((x, DR[1] - 6 - h, x + w, DR[1] - 6), fill=H_(r.choice(BOOKS))); x += w + 2
+        floor_cushion(img, 560, 1690, self.sc['cushion'], 240)
+        return (560, 1660, 0.85)
+
+    def sfx(self):
+        return [('drop_wood', 4.72), ('sand', 8.0, 11.0), ('knock', 11.05), ('hammer', self.HAM0, self.HAMP, 9)] + \
+               [('drill', a, b) for a, b in self.DRILL] + [('roller', 17.15, 19.35), ('led', 19.6)]
+
+    HOOKS = ["Old door → entryway coat rack", "Free door → {Paint} hallway rack", "Trash door → cozy entryway"]
+    TITLES = ["Old Door → Cozy Entryway Coat Rack", "This Coat Rack Used to Be a Door",
+              "{Paint} Door Coat Rack With Hidden LEDs", "Free Old Door → Hallway Glow-Up",
+              "Turning a Thrown-Away Door Into an Entryway", "Old Door + 4 Hooks = Entryway Upgrade",
+              "Door Coat Rack the {Pet} Guards", "Would You Hang Your Coat on This Old Door?",
+              "Entryway Makeover From One Old Door", "Rustic Door Rack for a Small {Place}"]
+    PAYOFF = "The {pet} now guards the entryway."
+    TAGS = ['#olddoor', '#coatrack', '#entrywaydecor', '#upcycledfurniture', '#hallwayideas', '#doorproject']
+
+
+# ================================================================ 9) KAVANOZ LAMBA PANOSU
+BRD = (300, 940, 820, 1040)
+
+def draw_jar(d, cx, by, lit=None, flowers=False, w=74, h=120):
+    if lit:
+        circ(d, (cx, by - h / 2), 70, tuple(lit) + (70,))
+    d.rounded_rectangle((cx - w / 2, by - h, cx + w / 2, by), radius=16, fill=(200, 225, 235, 120),
+                        outline=(240, 250, 255, 200), width=3)
+    d.rectangle((cx - w / 2 + 6, by - h - 14, cx + w / 2 - 6, by - h + 2), fill=H_('B9B4AC'))
+    if lit:
+        for k in range(6):
+            circ(d, (cx - 20 + (k % 3) * 20, by - 30 - (k // 3) * 40), 6, (255, 236, 180))
+    if flowers:
+        for k, c in enumerate((H_('E8A0B4'), H_('F4D35E'), H_('FFFFFF'))):
+            fx = cx - 18 + k * 18; d.line([(fx, by - h), (fx - 4, by - h - 50 - k * 8)], fill=H_('5E8C4A'), width=3)
+            circ(d, (fx - 4, by - h - 54 - k * 8), 12, c)
+
+def draw_board(img, col, wall=True, jars=0, clamps=0, lit=None, flowers=False, cx=None, by=None):
+    d = ImageDraw.Draw(img, 'RGBA')
+    if wall:
+        x0, y0, x1, y1 = BRD
+        d.rectangle((x0 + 10, y0 + 10, x1 + 16, y1 + 14), fill=(40, 25, 15, 50))
+        d.rectangle(BRD, fill=col); grain(d, x0, y0, x1, y1, col, 12, 4)
+        for k in range(jars):
+            jx = lerp(x0 + 90, x1 - 90, k / 2)
+            draw_jar(d, jx, y1 + 70, lit=lit, flowers=flowers)
+            if k < clamps:
+                d.rectangle((jx - 40, y1 + 6, jx + 40, y1 + 16), fill=H_('A9A9A9'))
+                d.line([(jx, y1 - 30), (jx, y1 + 8)], fill=H_('8A8A8A'), width=5)
+    else:
+        d.ellipse((cx - 280, by - 10, cx + 280, by + 16), fill=(40, 25, 15, 60))
+        d.polygon([(cx - 260, by - 30), (cx + 260, by - 30), (cx + 290, by - 60), (cx - 230, by - 60)], fill=col)
+        d.rectangle((cx - 260, by - 30, cx + 260, by), fill=shade(col, 0.82))
+
+def floor_jars(img):
+    d = ImageDraw.Draw(img, 'RGBA')
+    for k, x in enumerate((830, 905, 980)): draw_jar(d, x, 1650 - k * 6, w=62, h=100)
+
+class JarLanterns:
+    key = 'jar_lanterns'
+    locations = ['living', 'balcony', 'garden']
+    pets = ['cat', 'dog']
+    plant_front = True
+    led_floor = None
+    anchor_stop_x, carry_dx, carry_dy = 230, 140, 60
+    item_final = (520, 1670)
+    HAM0, HAMP = 11.4, 0.32
+
+    def __init__(self, sc):
+        self.sc = sc
+        self.fin = H_(sc['finish'][1])
+        self.can_col, self.can_label = self.fin, 'STAIN'
+
+    def draw_item(self, img, cx, by): draw_board(img, RAW, wall=False, cx=cx, by=by)
+    def anchor_static(self, img): floor_jars(img)
+
+    def stakes(self, img, lt):
+        floor_jars(img); draw_board(img, RAW, wall=False, cx=520, by=1670)
+        maya_think(img, 150, 1600, lt)
+
+    def proc_a(self, img, lt):
+        floor_jars(img); draw_board(img, mix(RAW, SANDED, ease(lt / 2.8)), wall=False, cx=520, by=1670)
+        info = draw_maya(img, 150, 1580, pose='kneel', t=lt, smile=0.2)
+        dust(img, lt, tool_sander(img, info), rate=50, life=1.0, seed=7)
+
+    def proc_b(self, img, lt):
+        t = 11 + lt
+        n = min(3, 1 + int(lt))
+        draw_board(img, SANDED, jars=n, clamps=n)
+        u, ang = hammer_swing(t, self.HAM0, self.HAMP)
+        info = draw_maya(img, 940, 1600, f=-1, pose='stand', t=lt, smile=0.2, arms=(95, 100, ang, ang + 25), lean=6)
+        hend = tool_hammer(img, info, ang)
+        if u < 0.12 and t >= self.HAM0: circ(ImageDraw.Draw(img, 'RGBA'), hend, 28, (255, 240, 200, 110))
+
+    def proc_c(self, img, lt):
+        lit = tuple(self.sc['led']) if lt > 1.2 else None
+        draw_board(img, SANDED, jars=3, clamps=3, lit=lit, flowers=lt > 2.2)
+        draw_maya(img, 940, 1600, f=-1, pose='stand', t=lt, smile=0.6 if lit else 0.3,
+                  arms=(150, 160, 120 + 10 * math.sin(lt * 6), 140))
+
+    def cu1(self, lt): return cu_brush(lt, SANDED, self.fin)
+    def cu2(self, lt): return cu_led(lt, self.fin, tuple(self.sc['led']))
+
+    def payoff_objects(self, img):
+        draw_board(img, self.fin, jars=3, clamps=3, lit=tuple(self.sc['led']), flowers=True)
+        floor_cushion(img, 560, 1690, self.sc['cushion'], 240)
+        return (560, 1660, 0.85)
+
+    def sfx(self):
+        return [('drop_wood', 4.72), ('sand', 8.0, 11.0), ('hammer', self.HAM0, self.HAMP, 8), ('led', 15.3)] + \
+               [('brush', 17.15, 19.35), ('led', 19.6)]
+
+    HOOKS = ["3 old jars → glowing wall lanterns", "Empty jars → cozy wall lights", "Jars + 1 board = magic wall"]
+    TITLES = ["3 Old Jars → Glowing Wall Lanterns", "Empty Jars Into Cozy Fairy-Light Lanterns",
+              "Jar Lantern Board for a {Place} Wall", "One Board + 3 Jars = Cozy Wall Glow",
+              "{Finish} Mason-Style Jar Wall Lights", "Don't Throw Away Empty Jars, Do This",
+              "Glass Jar Wall Lanterns, Start to Finish", "The Lantern Wall the {Pet} Naps Under",
+              "Would You Hang This Jar Lantern Board?", "Cheap Jars, Pinterest Wall Lights"]
+    PAYOFF = "The {pet} fell asleep under the glow."
+    TAGS = ['#jarlantern', '#masonjar', '#fairylights', '#walldecor', '#upcycling', '#cozydecor']
+
+
+# ================================================================ 10) PALETTEN DİKEY SAKSILIK
+PW = (360, 820, 760, 1590)
+POTS_W = [(430, 1060), (620, 1060), (520, 1260), (430, 1460), (660, 1460)]
+
+def pallet_wall(img, col, pots=0, plants=False, potc='C4693F'):
+    draw_panel(img, PW, col)
+    d = ImageDraw.Draw(img, 'RGBA')
+    for k, (x, y) in enumerate(POTS_W[:pots]):
+        d.polygon([(x - 46, y - 70), (x + 46, y - 70), (x + 34, y), (x - 34, y)], fill=H_(potc))
+        d.rectangle((x - 50, y - 80, x + 50, y - 64), fill=shade(H_(potc), 0.88))
+        d.rectangle((x - 3, y - 92, x + 3, y - 70), fill=H_('8A8A8A'))
+        if plants:
+            if k % 2: draw_succulent(d, x, y - 84, 40, ys=0.6)
+            else:
+                for j in range(9):
+                    a = -2.6 + j * 0.65; d.ellipse((x + 50 * math.cos(a) - 14, y - 90 + 40 * math.sin(a) - 10,
+                                                    x + 50 * math.cos(a) + 14, y - 90 + 40 * math.sin(a) + 10), fill=H_('6A9A50'))
+                for j in range(5):
+                    d.ellipse((x - 30 + j * 4, y - 60 + j * 26, x - 6 + j * 4, y - 44 + j * 26), fill=H_('5E8C4A'))
+
+def floor_pots(img, potc):
+    d = ImageDraw.Draw(img, 'RGBA')
+    for k, x in enumerate((840, 920, 1000)):
+        y = 1660 - (k % 2) * 10
+        d.polygon([(x - 34, y - 56), (x + 34, y - 56), (x + 25, y), (x - 25, y)], fill=H_(potc))
+
+class PalletPlanterWall:
+    key = 'pallet_planter'
+    locations = ['balcony', 'garden', 'living']
+    pets = ['cat', 'dog']
+    plant_front = False
+    led_floor = None
+    anchor_stop_x, carry_dx, carry_dy = 250, 160, 90
+    item_final = (520, 1600)
+    HAM0, HAMP = 14.25, 0.3
+
+    def __init__(self, sc):
+        self.sc = sc
+        self.paint = H_(sc['paint'][1])
+        self.can_col, self.can_label = self.paint, 'PAINT'
+
+    def draw_item(self, img, cx, by): draw_pallet(img, cx, by, RAW)
+    def anchor_static(self, img): floor_pots(img, self.sc['pot'])
+
+    def stakes(self, img, lt):
+        floor_pots(img, self.sc['pot']); pallet_wall(img, RAW)
+        maya_think(img, 140, 1600, lt)
+
+    def proc_a(self, img, lt):
+        floor_pots(img, self.sc['pot']); pallet_wall(img, mix(RAW, SANDED, ease(lt / 2.8)))
+        ph = lt * 2 * math.pi * 2.2
+        info = draw_maya(img, 170, 1600, pose='stand', t=lt, smile=0.2,
+                         arms=(40, 70, 62 + 10 * math.sin(ph), 58 + 12 * math.sin(ph)), lean=8)
+        dust(img, lt, tool_sander(img, info), rate=50, life=1.0, seed=7)
+
+    def proc_b(self, img, lt):
+        floor_pots(img, self.sc['pot']); pallet_wall(img, mix(SANDED, self.paint, ease(lt / 2.8)))
+        ph = lt * 2 * math.pi * 1.6
+        info = draw_maya(img, 930, 1600, f=-1, pose='stand', t=lt, smile=0.3,
+                         arms=(40, 60, 70 + 18 * math.sin(ph), 95 + 22 * math.sin(ph)), lean=6)
+        tool_roller(img, info, self.paint, f=-1)
+
+    def proc_c(self, img, lt):
+        t = 14 + lt
+        pallet_wall(img, self.paint, pots=min(5, 1 + int(lt * 1.7)), potc=self.sc['pot'])
+        u, ang = hammer_swing(t, self.HAM0, self.HAMP)
+        info = draw_maya(img, 920, 1600, f=-1, pose='stand', t=lt, smile=0.2, arms=(95, 100, ang, ang + 25), lean=6)
+        hend = tool_hammer(img, info, ang)
+        if u < 0.12 and t >= self.HAM0: circ(ImageDraw.Draw(img, 'RGBA'), hend, 28, (255, 240, 200, 110))
+
+    def cu1(self, lt): return cu_roller(lt, SANDED, self.paint)
+    def cu2(self, lt): return cu_plants(lt, self.paint)
+
+    def payoff_objects(self, img):
+        pallet_wall(img, self.paint, pots=5, plants=True, potc=self.sc['pot'])
+        floor_cushion(img, 820, 1720, self.sc['cushion'], 210)
+        return (820, 1690, 0.8)
+
+    def sfx(self):
+        return [('drop_wood', 4.72), ('sand', 8.0, 11.0), ('roller', 11.1, 13.9), ('hammer', self.HAM0, self.HAMP, 9),
+                ('roller', 17.15, 19.35), ('plant', 19.7)]
+
+    HOOKS = ["1 pallet → vertical garden", "Free pallet → {Paint} plant wall", "Pallet + 5 pots = green wall"]
+    TITLES = ["1 Free Pallet → Vertical Plant Wall", "Pallet Planter Wall for a Tiny {Place}",
+              "{Paint} Pallet Into a Hanging Garden", "Small Space? Grow Up, Not Out (Pallet Wall)",
+              "Old Pallet → Green Wall Glow-Up", "Vertical Pallet Garden, Start to Finish",
+              "The Plant Wall the {Pet} Supervised", "Would You Put This Plant Wall on Your {Place}?",
+              "5 Pots + 1 Pallet = Instant Garden", "Free Pallet, Pinterest Plant Wall"]
+    PAYOFF = "The {pet} supervised the whole planting."
+    TAGS = ['#palletgarden', '#verticalgarden', '#plantwall', '#palletproject', '#smallgarden', '#balconygarden']
+
+
+TEMPLATES = {c.key: c for c in (PalletBed, BlockBench, CrateShelf, TireOttoman, LadderShelf, ConcretePlanters,
+                                   SpoolTable, DoorCoatRack, JarLanterns, PalletPlanterWall)}
