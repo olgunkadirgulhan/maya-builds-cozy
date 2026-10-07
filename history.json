@@ -288,5 +288,16 @@
     "hook_style": "budget",
     "payoff_style": "reveal",
     "date": "2026-10-06"
+  },
+  {
+    "id": "20261007-2046-pallet_planter-26554",
+    "template": "pallet_planter",
+    "location": "balcony",
+    "pet": "dog",
+    "combo": "pallet_planter|balcony|dog:grey|teak|-|greige",
+    "title": "Small Space? Grow Up, Not Out (Pallet Wall) #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "pet",
+    "date": "2026-10-07"
   }
 ]
