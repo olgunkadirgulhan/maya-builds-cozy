@@ -299,5 +299,16 @@
     "hook_style": "split",
     "payoff_style": "pet",
     "date": "2026-10-07"
+  },
+  {
+    "id": "20261008-2041-jar_lanterns-10483",
+    "template": "jar_lanterns",
+    "location": "garden",
+    "pet": "cat",
+    "combo": "jar_lanterns|garden|cat:white|teak|-|greige",
+    "title": "One Board + 3 Jars = Cozy Wall Glow #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "reveal",
+    "date": "2026-10-08"
   }
 ]
