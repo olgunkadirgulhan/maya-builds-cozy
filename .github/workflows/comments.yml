@@ -33,13 +33,14 @@ jobs:
           CHANNEL_KIND: general
           CHANNEL_LANG: en
           STATE_FILE: comment_replies.json
+          REQUESTS_FILE: viewer_requests.json
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FIRST_QUESTIONS: "[\"Would you build this {topic}? 🔨\", \"Which color would you pick for the {topic}? 🎨\", \"Where would you put this at home? 🏡\", \"Before or after: which one wins? ✨\", \"What should Maya build next? 💡\", \"How much do you think this cost? 💸\", \"Would your pet love this too? 🐾\", \"Which step looked the most satisfying? 😌\", \"Rate this {topic} glow-up from 1 to 10 ⭐\", \"Have you ever upcycled something like this? ♻️\", \"Would you add lights or keep it simple? 💡\", \"Weekend project or too much work? 🛠️\", \"What would you change in this build? ✏️\", \"Indoor or garden: where does this fit best? 🌿\", \"What junk at home should Maya transform next? 🗑️\"]"
         run: python tools/auto_reply.py
       - run: |
           git config user.name "comment-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add comment_replies*.json 2>/dev/null || true
+          git add comment_replies*.json viewer_requests*.json 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m "comments: $(date -u +%F-%H%M)"
           for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done
