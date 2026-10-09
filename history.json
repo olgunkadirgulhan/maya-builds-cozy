@@ -310,5 +310,16 @@
     "hook_style": "budget",
     "payoff_style": "reveal",
     "date": "2026-10-08"
+  },
+  {
+    "id": "20261009-2042-door_rack-00351",
+    "template": "door_rack",
+    "location": "living",
+    "pet": "dog",
+    "combo": "door_rack|living|dog:grey|teak|-|blush",
+    "title": "Free Old Door → Hallway Glow-Up #diy #shorts",
+    "hook_style": "guess",
+    "payoff_style": "pet",
+    "date": "2026-10-09"
   }
 ]
