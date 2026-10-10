@@ -62,11 +62,16 @@ def load(p, default):
 def save_hist(hist):
     with open(HIST, 'w', encoding='utf-8') as f: json.dump(hist, f, ensure_ascii=False, indent=2)
 
+WEIGHTS = {'tire_ottoman': 6.0, 'ladder_shelf': 3.0, 'pallet_bed': 1.5}
+
 def pick_template(rng, hist, forced=None):
     if forced: return forced
     keys = list(TEMPLATES)
-    recent = [h['template'] for h in hist[-(len(keys) - 1):]]
-    return rng.choice([k for k in keys if k not in recent] or keys)
+    # 2026-10-10: tam sıra yerine ağırlıklı; en çok izlenenler (lastik ~1.000+, merdiven ~1.000) daha sık gelir,
+    # son 3 videonun şablonu yine gelmez (çeşitlilik)
+    recent = [h['template'] for h in hist[-3:]]
+    pool = [k for k in keys if k not in recent] or keys
+    return rng.choices(pool, weights=[WEIGHTS.get(k, 1.0) for k in pool])[0]
 
 def pick_location(rng, T, hist, forced=None):
     if forced: return forced
