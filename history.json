@@ -321,5 +321,16 @@
     "hook_style": "guess",
     "payoff_style": "pet",
     "date": "2026-10-09"
+  },
+  {
+    "id": "20261010-2019-tire_ottoman-13051",
+    "template": "tire_ottoman",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "tire_ottoman|balcony|cat:grey tabby|charcoal|cotton|cream",
+    "title": "Cotton Rope Ottoman From a Junk Tire #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "reveal",
+    "date": "2026-10-10"
   }
 ]
