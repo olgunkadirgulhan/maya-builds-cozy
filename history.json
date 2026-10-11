@@ -332,5 +332,16 @@
     "hook_style": "split",
     "payoff_style": "reveal",
     "date": "2026-10-10"
+  },
+  {
+    "id": "20261011-2033-spool_table-35104",
+    "template": "spool_table",
+    "location": "garden",
+    "pet": "dog",
+    "combo": "spool_table|garden|dog:chocolate|walnut|-|sky",
+    "title": "Wooden Spool Table on Wheels #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "pet",
+    "date": "2026-10-11"
   }
 ]
