@@ -343,5 +343,16 @@
     "hook_style": "budget",
     "payoff_style": "pet",
     "date": "2026-10-11"
+  },
+  {
+    "id": "20261012-1538-pallet_bed-67785",
+    "template": "pallet_bed",
+    "location": "garage",
+    "pet": "cat",
+    "combo": "pallet_bed|garage|cat:black|charcoal|-|sky",
+    "title": "Free Pallet → Charcoal Cat Bed #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "reveal",
+    "date": "2026-10-12"
   }
 ]
