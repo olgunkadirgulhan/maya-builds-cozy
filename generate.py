@@ -63,6 +63,29 @@ def save_hist(hist):
     with open(HIST, 'w', encoding='utf-8') as f: json.dump(hist, f, ensure_ascii=False, indent=2)
 
 WEIGHTS = {'tire_ottoman': 6.0, 'ladder_shelf': 3.0, 'pallet_bed': 1.5}
+# 2026-10-12 trendler: "diy …" arama önerilerinde geçen proje türü 2,5x
+TREND_KEYS = {'pallet_bed': ['pallet', 'dog bed', 'cat bed', 'pet bed'], 'block_bench': ['cinder block', 'bench'],
+              'crate_shelf': ['crate', 'bookshelf'], 'tire_ottoman': ['tire', 'ottoman', 'pouf'], 'ladder_shelf': ['ladder', 'plant shelf'],
+              'concrete_planters': ['concrete', 'planter'], 'spool_table': ['spool', 'coffee table', 'side table'],
+              'door_rack': ['old door', 'coat rack', 'entryway'], 'jar_lanterns': ['jar', 'lantern', 'fairy light'],
+              'pallet_planter': ['pallet garden', 'vertical garden', 'plant wall']}
+_TREND = None
+
+
+def trend_text():
+    global _TREND
+    if _TREND is None:
+        _TREND = ''
+        try:
+            import requests
+            for q in ('diy', 'diy home decor', 'diy furniture', 'upcycling'):
+                r = requests.get('https://suggestqueries.google.com/complete/search',
+                                 params={'client': 'firefox', 'ds': 'yt', 'hl': 'en', 'q': q}, timeout=6)
+                _TREND += ' ' + ' '.join(r.json()[1]).lower()
+        except Exception:
+            pass
+    return _TREND
+
 
 def pick_template(rng, hist, forced=None):
     if forced: return forced
@@ -71,7 +94,11 @@ def pick_template(rng, hist, forced=None):
     # son 3 videonun şablonu yine gelmez (çeşitlilik)
     recent = [h['template'] for h in hist[-3:]]
     pool = [k for k in keys if k not in recent] or keys
-    return rng.choices(pool, weights=[WEIGHTS.get(k, 1.0) for k in pool])[0]
+    tt = trend_text()
+    boost = {k: 2.5 for k in pool if any(w in tt for w in TREND_KEYS.get(k, []))}
+    if boost:
+        print('trend projeleri:', sorted(boost), flush=True)
+    return rng.choices(pool, weights=[WEIGHTS.get(k, 1.0) * boost.get(k, 1.0) for k in pool])[0]
 
 def pick_location(rng, T, hist, forced=None):
     if forced: return forced
