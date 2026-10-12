@@ -1176,8 +1176,12 @@ class Video:
                               '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p',
                               '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out_mp4],
                              stdin=subprocess.PIPE)
-        for i in range(NF):
-            p.stdin.write(self.frame(i / FPS).tobytes())
+        first = self.frame(0.0)
+        for i in range(NF):   # son 0.45 sn ilk kareye karışır: Shorts başa sarınca kesintisiz döngü
+            t = i / FPS; f = self.frame(t)
+            if t > NF / FPS - 0.45:
+                f = Image.blend(f.convert('RGB'), first.convert('RGB'), min(1.0, (t - (NF / FPS - 0.45)) / 0.45))
+            p.stdin.write(f.tobytes())
         p.stdin.close()
         if p.wait() != 0: raise RuntimeError('ffmpeg failed')
         self.frame(1.0).save(out_mp4[:-4] + '_thumb.jpg', quality=90)
