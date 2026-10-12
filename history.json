@@ -354,5 +354,16 @@
     "hook_style": "split",
     "payoff_style": "reveal",
     "date": "2026-10-12"
+  },
+  {
+    "id": "20261012-2041-ladder_shelf-92803",
+    "template": "ladder_shelf",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "ladder_shelf|balcony|cat:white|honey oak|-|blush",
+    "title": "The Plant Shelf Maya's Cat Naps Under #diy #shorts",
+    "hook_style": "guess",
+    "payoff_style": "pet",
+    "date": "2026-10-12"
   }
 ]
