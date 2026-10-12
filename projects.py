@@ -105,7 +105,8 @@ class PalletBed:
                [('brush', 17.15, 19.35), ('led', 19.6)]
 
     HOOKS = ["2 old pallets → {pet}'s dream bed", "Free pallets → cozy {pet} bed", "2 pallets → {pet} heaven"]
-    TITLES = ["2 Old Pallets → My {Pet}'s Dream Bed", "I Turned Free Pallets Into a Cozy {Pet} Bed",
+    TITLES = ["DIY Pallet Bed for My {Pet} (Easy Pallet Project)", "DIY Pallet Projects: Cozy {Pet} Bed",
+              "2 Old Pallets → My {Pet}'s Dream Bed", "I Turned Free Pallets Into a Cozy {Pet} Bed",
               "Pallet {Pet} Bed With LED Glow", "From Trash Pallets to {Pet} Bed Glow-Up",
               "My {Pet} Needed a Bed, So I Used Free Pallets", "Building a {Place} {Pet} Bed From Old Pallets",
               "Pallet Bed My {Pet} Refuses to Leave", "Sanding, Staining, Glowing: Pallet {Pet} Bed",
@@ -1244,7 +1245,8 @@ class PalletPlanterWall:
                 ('roller', 17.15, 19.35), ('plant', 19.7)]
 
     HOOKS = ["1 pallet → vertical garden", "Free pallet → {Paint} plant wall", "Pallet + 5 pots = green wall"]
-    TITLES = ["1 Free Pallet → Vertical Plant Wall", "Pallet Planter Wall for a Tiny {Place}",
+    TITLES = ["DIY Pallet Garden: Vertical Plant Wall", "Easy DIY Pallet Projects: Plant Wall for a Tiny {Place}",
+              "1 Free Pallet → Vertical Plant Wall", "Pallet Planter Wall for a Tiny {Place}",
               "{Paint} Pallet Into a Hanging Garden", "Small Space? Grow Up, Not Out (Pallet Wall)",
               "Old Pallet → Green Wall Glow-Up", "Vertical Pallet Garden, Start to Finish",
               "The Plant Wall the {Pet} Supervised", "Would You Put This Plant Wall on Your {Place}?",
