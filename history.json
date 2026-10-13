@@ -365,5 +365,16 @@
     "hook_style": "guess",
     "payoff_style": "pet",
     "date": "2026-10-12"
+  },
+  {
+    "id": "20261013-2042-tire_ottoman-12619",
+    "template": "tire_ottoman",
+    "location": "garden",
+    "pet": "dog",
+    "combo": "tire_ottoman|garden|dog:cream|charcoal|sage cotton|blush",
+    "title": "2 Old Tires → Cozy Rope Ottoman #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "reveal",
+    "date": "2026-10-13"
   }
 ]
