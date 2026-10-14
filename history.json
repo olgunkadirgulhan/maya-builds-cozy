@@ -376,5 +376,16 @@
     "hook_style": "budget",
     "payoff_style": "reveal",
     "date": "2026-10-13"
+  },
+  {
+    "id": "20261014-2019-door_rack-80010",
+    "template": "door_rack",
+    "location": "garage",
+    "pet": "cat",
+    "combo": "door_rack|garage|cat:white|honey oak|-|cream",
+    "title": "Door Coat Rack the Cat Guards #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "pet",
+    "date": "2026-10-14"
   }
 ]
