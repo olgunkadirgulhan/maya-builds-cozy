@@ -3,7 +3,7 @@ Maya DIY Shorts — ortak çizim/ses/render motoru.
 Her video: HOOK (before/after) -> ANCHOR -> STAKES -> PROCESS A/B/C -> CU1 -> CU2 -> PAYOFF (28 sn, 9:16).
 Proje şablonları projects.py içinde; senaryo seçimi generate.py içinde.
 """
-import math, random, os, subprocess, wave
+import math, random, os, subprocess, wave, time
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
@@ -1230,11 +1230,15 @@ def narration_track(sc, N):
     for i, (t0, text) in enumerate(narration_lines(sc)):
         if not text: continue
         mp3 = os.path.join(tmp, f'n{i}.mp3')
-        try:
-            asyncio.run(edge_tts.Communicate(text, NARR_VOICE, rate='-4%').save(mp3))
-            raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', mp3, '-f', 's16le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True, check=True).stdout
-        except Exception:
-            return None
+        raw = None
+        for k in range(3):   # edge-tts ara sıra NoAudioReceived döner: tekrar dene, olmazsa satırı atla
+            try:
+                asyncio.run(edge_tts.Communicate(text if k < 2 else text.rstrip('.') + '!', NARR_VOICE, rate='-4%').save(mp3))
+                raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', mp3, '-f', 's16le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True, check=True).stdout
+                break
+            except Exception:
+                time.sleep(1.5)
+        if not raw: continue
         x = np.frombuffer(raw, np.int16).astype(np.float64) / 32768
         nz = np.nonzero(np.abs(x) > 0.01)[0]
         if len(nz): x = x[max(0, nz[0] - 200): nz[-1] + 400]
