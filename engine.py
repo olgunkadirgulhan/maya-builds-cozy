@@ -1189,6 +1189,59 @@ class Video:
 
 # ---------------------------------------------------------------- ses (ASMR + lo-fi)
 SR = 44100
+
+# ---------------------------------------------------------------- anlatıcı (2026-10-18: sessiz format en zayıf kanaldı → kısa, sakin anlatım)
+NARR_VOICE = os.environ.get('MAYA_VOICE', 'en-US-EmmaNeural')   # başka kanalda kullanılmıyor
+STEP_EARLY = ["First, sand everything smooth.", "Measure twice, cut once.", "Clean it up before anything else.",
+              "Start with a solid base.", "Every corner gets the same care."]
+STEP_LATE = ["Now the cozy part.", "A little paint goes a long way.", "Check that it is level.", "Time for the finish.",
+             "Almost there.", "This is where it starts to look good."]
+
+
+def narration_lines(sc):
+    rng = random.Random(sc['seed'] * 7 + 3)
+    hook = sc.get('hook_text', '')
+    if '→' in hook:
+        a, b = [x.strip() for x in hook.split('→', 1)]
+        b = ' '.join(w if w in ('Pinterest',) else w.lower() for w in b.split())   # renk adları küçük harf
+        w0, wl = b.split()[0], b.split()[-1].lower()
+        if w0.endswith("'s"): b = 'the ' + b                    # "dog's new throne" → "the dog's new throne"
+        elif w0.lower() not in ('a', 'an', 'the') and not w0[0].isdigit() and not wl.endswith('s') and wl not in ('heaven', 'paradise'):
+            b = ('an ' if w0[0].lower() in 'aeiou' else 'a ') + b   # "Pinterest ottoman" → "a Pinterest ottoman"
+        hook = f"{a}, turned into {b}."
+    import re as _re
+    hook = _re.sub(r'^\$0\s+', 'A free ', hook)
+    hook = _re.sub(r'\$(\d+)', r'\1 dollars', hook).replace('  ', ' ')
+    steps = [rng.choice(STEP_EARLY), rng.choice(STEP_LATE)]
+    fin = sc.get('finish', [''])[0]
+    if fin and rng.random() < 0.5: steps[1] = f"A coat of {fin.lower()} finish."
+    payoff = (sc.get('description', '').split('\n') + ['', ''])[1].strip()
+    return [(0.4, hook), (7.2, steps[0]), (14.0, steps[1]), (22.4, payoff), (26.2, sc.get('cta', ''))]
+
+
+def narration_track(sc, N):
+    """[(zaman, metin)] → mono dizi (SR). Hata olursa None (video anlatımsız kalır)."""
+    import asyncio, tempfile
+    try:
+        import edge_tts
+    except Exception:
+        return None
+    out = np.zeros(N); tmp = tempfile.mkdtemp()
+    for i, (t0, text) in enumerate(narration_lines(sc)):
+        if not text: continue
+        mp3 = os.path.join(tmp, f'n{i}.mp3')
+        try:
+            asyncio.run(edge_tts.Communicate(text, NARR_VOICE, rate='-4%').save(mp3))
+            raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', mp3, '-f', 's16le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True, check=True).stdout
+        except Exception:
+            return None
+        x = np.frombuffer(raw, np.int16).astype(np.float64) / 32768
+        nz = np.nonzero(np.abs(x) > 0.01)[0]
+        if len(nz): x = x[max(0, nz[0] - 200): nz[-1] + 400]
+        i0 = int(t0 * SR); j = min(N, i0 + len(x)); out[i0:j] += x[:j - i0]
+    return out / (np.abs(out).max() + 1e-9) * 0.9 if out.any() else None
+
+
 def build_audio(sc, events, path):
     arng = np.random.default_rng(sc['seed'])
     def tt(dur): return np.arange(int(dur * SR)) / SR
@@ -1317,7 +1370,15 @@ def build_audio(sc, events, path):
     for k in range(4):
         place(sfx, chime(1320, 0.4) + 0.5 * chime(1760, 0.3), END0 + CLICK_BELL + 0.03 + k * 0.09, 0.08 * (1 - k * 0.2))
 
-    mixd = mus * 0.55 + sfx * 0.9
+    nar = narration_track(sc, N)
+    if nar is not None:                                    # konuşurken müzik ve efektler kısılır (ducking)
+        env = np.convolve(np.abs(nar) > 0.02, np.ones(int(0.25 * SR)) / int(0.25 * SR), mode='same')
+        duck = 1 - 0.55 * np.clip(env * 3, 0, 1)
+        mixd = mus * 0.55 * duck + sfx * 0.9 * (0.6 + 0.4 * duck)
+        mixd *= 0.62 / np.max(np.abs(mixd))
+        mixd = mixd + nar * 0.95
+    else:
+        mixd = mus * 0.55 + sfx * 0.9
     mixd *= 0.89 / np.max(np.abs(mixd))
     fade = int(0.5 * SR); mixd[-fade:] *= np.linspace(1, 0, fade)
     dl = int(0.008 * SR)
