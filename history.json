@@ -420,5 +420,16 @@
     "hook_style": "budget",
     "payoff_style": "pet",
     "date": "2026-10-17"
+  },
+  {
+    "id": "20261017-2120-spool_table-22553",
+    "template": "spool_table",
+    "location": "living",
+    "pet": "cat",
+    "combo": "spool_table|living|cat:white|teak|-|blush",
+    "title": "Junk Spool → Living Room Side Table #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "reveal",
+    "date": "2026-10-17"
   }
 ]
