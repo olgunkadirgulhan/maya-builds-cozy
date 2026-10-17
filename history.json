@@ -431,5 +431,16 @@
     "hook_style": "split",
     "payoff_style": "reveal",
     "date": "2026-10-17"
+  },
+  {
+    "id": "20261017-2154-pallet_bed-96331",
+    "template": "pallet_bed",
+    "location": "balcony",
+    "pet": "dog",
+    "combo": "pallet_bed|balcony|dog:cream|walnut|-|greige",
+    "title": "DIY Pallet Projects: Cozy Dog Bed #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "pet",
+    "date": "2026-10-17"
   }
 ]
