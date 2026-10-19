@@ -453,5 +453,16 @@
     "hook_style": "split",
     "payoff_style": "pet",
     "date": "2026-10-18"
+  },
+  {
+    "id": "20261019-2041-concrete_planters-84784",
+    "template": "concrete_planters",
+    "location": "living",
+    "pet": "dog",
+    "combo": "concrete_planters|living|dog:grey|walnut|sage|cream",
+    "title": "3 Concrete Planters From Old Buckets #diy #shorts",
+    "hook_style": "guess",
+    "payoff_style": "pet",
+    "date": "2026-10-19"
   }
 ]
