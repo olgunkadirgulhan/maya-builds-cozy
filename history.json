@@ -464,5 +464,16 @@
     "hook_style": "guess",
     "payoff_style": "pet",
     "date": "2026-10-19"
+  },
+  {
+    "id": "20261020-2007-tire_ottoman-28448",
+    "template": "tire_ottoman",
+    "location": "garage",
+    "pet": "cat",
+    "combo": "tire_ottoman|garage|cat:white|honey oak|terracotta|sage",
+    "title": "Boho Pouf (It's Secretly a Tire) #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "reveal",
+    "date": "2026-10-20"
   }
 ]
