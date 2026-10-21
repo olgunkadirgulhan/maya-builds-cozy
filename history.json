@@ -475,5 +475,16 @@
     "hook_style": "split",
     "payoff_style": "reveal",
     "date": "2026-10-20"
+  },
+  {
+    "id": "20261021-2021-ladder_shelf-98516",
+    "template": "ladder_shelf",
+    "location": "garden",
+    "pet": "cat",
+    "combo": "ladder_shelf|garden|cat:orange tabby|charcoal|-|sage",
+    "title": "Giving an Old Ladder a Second Life #diy #shorts",
+    "hook_style": "guess",
+    "payoff_style": "pet",
+    "date": "2026-10-21"
   }
 ]
