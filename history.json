@@ -486,5 +486,16 @@
     "hook_style": "guess",
     "payoff_style": "pet",
     "date": "2026-10-21"
+  },
+  {
+    "id": "20261022-2017-pallet_bed-26969",
+    "template": "pallet_bed",
+    "location": "balcony",
+    "pet": "dog",
+    "combo": "pallet_bed|balcony|dog:cream|charcoal|-|greige",
+    "title": "Pallet Dog Bed With LED Glow #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "pet",
+    "date": "2026-10-22"
   }
 ]
