@@ -497,5 +497,16 @@
     "hook_style": "split",
     "payoff_style": "pet",
     "date": "2026-10-22"
+  },
+  {
+    "id": "20261023-2004-jar_lanterns-01455",
+    "template": "jar_lanterns",
+    "location": "living",
+    "pet": "cat",
+    "combo": "jar_lanterns|living|cat:orange tabby|honey oak|-|sage",
+    "title": "Would You Hang This Jar Lantern Board? #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "pet",
+    "date": "2026-10-23"
   }
 ]
