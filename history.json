@@ -508,5 +508,16 @@
     "hook_style": "budget",
     "payoff_style": "pet",
     "date": "2026-10-23"
+  },
+  {
+    "id": "20261024-2042-tire_ottoman-29389",
+    "template": "tire_ottoman",
+    "location": "garage",
+    "pet": "dog",
+    "combo": "tire_ottoman|garage|dog:chocolate|walnut|terracotta|blush",
+    "title": "Wrapping an Old Tire in Terracotta Rope #diy #shorts",
+    "hook_style": "guess",
+    "payoff_style": "reveal",
+    "date": "2026-10-24"
   }
 ]
