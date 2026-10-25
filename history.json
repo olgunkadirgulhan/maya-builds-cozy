@@ -519,5 +519,16 @@
     "hook_style": "guess",
     "payoff_style": "reveal",
     "date": "2026-10-24"
+  },
+  {
+    "id": "20261025-2042-spool_table-49522",
+    "template": "spool_table",
+    "location": "garden",
+    "pet": "cat",
+    "combo": "spool_table|garden|cat:black|charcoal|-|sky",
+    "title": "Old Wooden Spool Into a Terracotta Coffee Table #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "pet",
+    "date": "2026-10-25"
   }
 ]
