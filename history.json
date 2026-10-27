@@ -541,5 +541,16 @@
     "hook_style": "guess",
     "payoff_style": "pet",
     "date": "2026-10-26"
+  },
+  {
+    "id": "20261027-2042-jar_lanterns-27946",
+    "template": "jar_lanterns",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "jar_lanterns|balcony|cat:white|teak|-|cream",
+    "title": "Cheap Jars, Pinterest Wall Lights #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "reveal",
+    "date": "2026-10-27"
   }
 ]
