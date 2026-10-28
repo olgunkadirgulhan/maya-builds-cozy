@@ -552,5 +552,16 @@
     "hook_style": "budget",
     "payoff_style": "reveal",
     "date": "2026-10-27"
+  },
+  {
+    "id": "20261028-2042-ladder_shelf-06279",
+    "template": "ladder_shelf",
+    "location": "garden",
+    "pet": "cat",
+    "combo": "ladder_shelf|garden|cat:grey tabby|teak|-|greige",
+    "title": "Would You Keep This Ladder Shelf in Your Backyard? #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "pet",
+    "date": "2026-10-28"
   }
 ]
