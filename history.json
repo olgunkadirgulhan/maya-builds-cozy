@@ -574,5 +574,16 @@
     "hook_style": "budget",
     "payoff_style": "reveal",
     "date": "2026-10-29"
+  },
+  {
+    "id": "20261030-2042-pallet_bed-21108",
+    "template": "pallet_bed",
+    "location": "garage",
+    "pet": "cat",
+    "combo": "pallet_bed|garage|cat:orange tabby|teak|-|sage",
+    "title": "Pallet Cat Bed With LED Glow #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "pet",
+    "date": "2026-10-30"
   }
 ]
