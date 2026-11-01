@@ -596,5 +596,16 @@
     "hook_style": "guess",
     "payoff_style": "reveal",
     "date": "2026-10-31"
+  },
+  {
+    "id": "20261101-2041-crate_shelf-35892",
+    "template": "crate_shelf",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "crate_shelf|balcony|cat:grey tabby|walnut|-|greige",
+    "title": "Old Crates → Glowing Bookshelf #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "pet",
+    "date": "2026-11-01"
   }
 ]
