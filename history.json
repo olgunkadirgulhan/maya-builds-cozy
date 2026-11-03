@@ -618,5 +618,16 @@
     "hook_style": "split",
     "payoff_style": "reveal",
     "date": "2026-11-02"
+  },
+  {
+    "id": "20261103-2042-pallet_bed-73853",
+    "template": "pallet_bed",
+    "location": "garden",
+    "pet": "cat",
+    "combo": "pallet_bed|garden|cat:black|espresso|-|blush",
+    "title": "Would Your Cat Sleep Here? Pallet Bed Build #diy #shorts",
+    "hook_style": "guess",
+    "payoff_style": "pet",
+    "date": "2026-11-03"
   }
 ]
