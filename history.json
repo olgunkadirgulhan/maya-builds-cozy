@@ -651,5 +651,16 @@
     "hook_style": "guess",
     "payoff_style": "pet",
     "date": "2026-11-05"
+  },
+  {
+    "id": "20261106-2041-pallet_planter-20604",
+    "template": "pallet_planter",
+    "location": "garden",
+    "pet": "dog",
+    "combo": "pallet_planter|garden|dog:golden|walnut|-|sage",
+    "title": "Free Pallet, Pinterest Plant Wall #diy #shorts",
+    "hook_style": "budget",
+    "payoff_style": "reveal",
+    "date": "2026-11-06"
   }
 ]
