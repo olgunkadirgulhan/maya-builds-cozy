@@ -662,5 +662,16 @@
     "hook_style": "budget",
     "payoff_style": "reveal",
     "date": "2026-11-06"
+  },
+  {
+    "id": "20261107-2028-spool_table-53347",
+    "template": "spool_table",
+    "location": "balcony",
+    "pet": "cat",
+    "combo": "spool_table|balcony|cat:orange tabby|espresso|-|sage",
+    "title": "Free Cable Spool → Cozy Side Table #diy #shorts",
+    "hook_style": "split",
+    "payoff_style": "pet",
+    "date": "2026-11-07"
   }
 ]
