@@ -1,0 +1,389 @@
+[
+ {
+  "id": "t1",
+  "topic": "Mobile Phones",
+  "emoji": "📱",
+  "steps": [
+   {
+    "year": 1973,
+    "fact": "First handheld cellular phone call made",
+    "stat": "1.1 kg"
+   },
+   {
+    "year": 1989,
+    "fact": "First pocket-sized flip phone launched",
+    "stat": "350 g"
+   },
+   {
+    "year": 1992,
+    "fact": "First text message sent over network",
+    "stat": "160 chars"
+   },
+   {
+    "year": 1999,
+    "fact": "Built-in phone cameras introduced",
+    "stat": "0.11 MP"
+   },
+   {
+    "year": 2007,
+    "fact": "Capacitive multi-touch displays emerge",
+    "stat": "3.5 inches"
+   }
+  ]
+ },
+ {
+  "id": "t2",
+  "topic": "Bicycles",
+  "emoji": "🚲",
+  "steps": [
+   {
+    "year": 1817,
+    "fact": "Wooden walking machine without pedals",
+    "stat": "22 kg"
+   },
+   {
+    "year": 1865,
+    "fact": "Pedals attached to front wooden wheel",
+    "stat": "15 km/h"
+   },
+   {
+    "year": 1870,
+    "fact": "Giant front wheel penny-farthing debuts",
+    "stat": "1.5 m wheel"
+   },
+   {
+    "year": 1885,
+    "fact": "Chain drive safety bicycle created",
+    "stat": "Equal wheels"
+   },
+   {
+    "year": 2020,
+    "fact": "Lightweight electric commuter bikes boom",
+    "stat": "25 km/h"
+   }
+  ]
+ },
+ {
+  "id": "t3",
+  "topic": "Light Bulbs",
+  "emoji": "💡",
+  "steps": [
+   {
+    "year": 1879,
+    "fact": "Carbonized filament bulb runs for hours",
+    "stat": "40 hours"
+   },
+   {
+    "year": 1906,
+    "fact": "Long-lasting tungsten filament adopted",
+    "stat": "1,000 hours"
+   },
+   {
+    "year": 1938,
+    "fact": "Fluorescent tubes offer diffuse lighting",
+    "stat": "50 lumens/W"
+   },
+   {
+    "year": 1959,
+    "fact": "Halogen lamps provide bright white light",
+    "stat": "2,000 hours"
+   },
+   {
+    "year": 1995,
+    "fact": "Compact fluorescent spiral bulbs spread",
+    "stat": "15 Watts"
+   }
+  ]
+ },
+ {
+  "id": "t4",
+  "topic": "Televisions",
+  "emoji": "📺",
+  "steps": [
+   {
+    "year": 1928,
+    "fact": "First mechanical television broadcasts",
+    "stat": "30 lines"
+   },
+   {
+    "year": 1936,
+    "fact": "Electronic cathode ray tube sets debut",
+    "stat": "405 lines"
+   },
+   {
+    "year": 1954,
+    "fact": "First regular color broadcasts launched",
+    "stat": "15 inches"
+   },
+   {
+    "year": 1997,
+    "fact": "Flat-panel plasma screen displays arrive",
+    "stat": "42 inches"
+   },
+   {
+    "year": 2010,
+    "fact": "Slim digital high-definition sets standard",
+    "stat": "1080p"
+   },
+   {
+    "year": 2020,
+    "fact": "Ultra-sharp organic LED flat screens rule",
+    "stat": "4K resolution"
+   }
+  ]
+ },
+ {
+  "id": "t5",
+  "topic": "Music Players",
+  "emoji": "🎵",
+  "steps": [
+   {
+    "year": 1877,
+    "fact": "First sound recorded on tin foil cylinders",
+    "stat": "2 minutes"
+   },
+   {
+    "year": 1948,
+    "fact": "Vinyl microgroove long-playing records",
+    "stat": "33 RPM"
+   },
+   {
+    "year": 1963,
+    "fact": "Compact magnetic audio cassette released",
+    "stat": "60 minutes"
+   },
+   {
+    "year": 1982,
+    "fact": "Optical digital compact disc introduced",
+    "stat": "74 minutes"
+   },
+   {
+    "year": 1998,
+    "fact": "Portable solid-state digital audio players",
+    "stat": "32 MB"
+   }
+  ]
+ },
+ {
+  "id": "t6",
+  "topic": "Airplanes",
+  "emoji": "✈",
+  "steps": [
+   {
+    "year": 1903,
+    "fact": "First controlled heavier-than-air flight",
+    "stat": "37 meters"
+   },
+   {
+    "year": 1919,
+    "fact": "First nonstop flight across the ocean",
+    "stat": "3,000 km"
+   },
+   {
+    "year": 1939,
+    "fact": "First turbojet powered airplane flies",
+    "stat": "600 km/h"
+   },
+   {
+    "year": 1952,
+    "fact": "Commercial jetliner passenger service",
+    "stat": "800 km/h"
+   },
+   {
+    "year": 1969,
+    "fact": "Wide-body double-deck jumbo jets fly",
+    "stat": "400 seats"
+   },
+   {
+    "year": 2020,
+    "fact": "Carbon composite long-haul jetliners rule",
+    "stat": "15,000 km"
+   }
+  ]
+ },
+ {
+  "id": "t7",
+  "topic": "Cameras",
+  "emoji": "📷",
+  "steps": [
+   {
+    "year": 1839,
+    "fact": "Metal plate daguerreotype photos created",
+    "stat": "15 minutes"
+   },
+   {
+    "year": 1888,
+    "fact": "First flexible roll-film box cameras",
+    "stat": "100 photos"
+   },
+   {
+    "year": 1925,
+    "fact": "Compact handheld 35mm cameras spread",
+    "stat": "36 frames"
+   },
+   {
+    "year": 1948,
+    "fact": "Instant film prints develop in minutes",
+    "stat": "60 seconds"
+   },
+   {
+    "year": 1995,
+    "fact": "Consumer digital cameras with LCD screens",
+    "stat": "0.3 MP"
+   },
+   {
+    "year": 2018,
+    "fact": "Full-frame mirrorless digital bodies",
+    "stat": "45 MP"
+   }
+  ]
+ },
+ {
+  "id": "t8",
+  "topic": "Home Computers",
+  "emoji": "💻",
+  "steps": [
+   {
+    "year": 1975,
+    "fact": "First build-it-yourself computer kits",
+    "stat": "256 Bytes"
+   },
+   {
+    "year": 1977,
+    "fact": "Pre-assembled computers hit store shelves",
+    "stat": "4 KB RAM"
+   },
+   {
+    "year": 1984,
+    "fact": "Graphic user interface and mouse spread",
+    "stat": "128 KB RAM"
+   },
+   {
+    "year": 1995,
+    "fact": "Affordable multimedia home desktop PCs",
+    "stat": "16 MB RAM"
+   },
+   {
+    "year": 2008,
+    "fact": "Thin lightweight laptops replace towers",
+    "stat": "1.3 kg"
+   },
+   {
+    "year": 2020,
+    "fact": "High-density multi-core portable chips",
+    "stat": "16 GB RAM"
+   }
+  ]
+ },
+ {
+  "id": "t9",
+  "topic": "Video Game Consoles",
+  "emoji": "🎮",
+  "steps": [
+   {
+    "year": 1972,
+    "fact": "First home console connects to television",
+    "stat": "Analog"
+   },
+   {
+    "year": 1977,
+    "fact": "Swappable ROM cartridge systems emerge",
+    "stat": "8-bit"
+   },
+   {
+    "year": 1989,
+    "fact": "Handheld console with swappable games",
+    "stat": "160x144 px"
+   },
+   {
+    "year": 1994,
+    "fact": "Real-time 3D polygon graphics and discs",
+    "stat": "32-bit"
+   },
+   {
+    "year": 2005,
+    "fact": "High-definition graphics and online play",
+    "stat": "720p"
+   },
+   {
+    "year": 2020,
+    "fact": "Ray tracing and fast solid-state drives",
+    "stat": "4K 60fps"
+   }
+  ]
+ },
+ {
+  "id": "t10",
+  "topic": "Wristwatches",
+  "emoji": "⌚",
+  "steps": [
+   {
+    "year": 1904,
+    "fact": "First practical men's pilot wristwatch",
+    "stat": "Mechanical"
+   },
+   {
+    "year": 1957,
+    "fact": "First battery-powered electric watch sold",
+    "stat": "Battery"
+   },
+   {
+    "year": 1969,
+    "fact": "High-precision quartz crystal watch debuts",
+    "stat": "5 sec/month"
+   },
+   {
+    "year": 1972,
+    "fact": "Digital watch with light-emitting screen",
+    "stat": "LED screen"
+   },
+   {
+    "year": 1999,
+    "fact": "First wristwatch with satellite GPS chip",
+    "stat": "GPS chip"
+   },
+   {
+    "year": 2015,
+    "fact": "Connected smartwatches with touchscreen",
+    "stat": "Heart rate"
+   }
+  ]
+ },
+ {
+  "id": "t11",
+  "topic": "Refrigerators",
+  "emoji": "🧊",
+  "steps": [
+   {
+    "year": 1834,
+    "fact": "First vapor compression refrigeration loop",
+    "stat": "Ice maker"
+   },
+   {
+    "year": 1913,
+    "fact": "First electric domestic home refrigerators",
+    "stat": "$900"
+   },
+   {
+    "year": 1927,
+    "fact": "Hermetically sealed units become common",
+    "stat": "1M units"
+   },
+   {
+    "year": 1947,
+    "fact": "Two-door bottom freezer layout popular",
+    "stat": "Dual temp"
+   },
+   {
+    "year": 1990,
+    "fact": "Ozone-safe modern refrigerants introduced",
+    "stat": "Ozone safe"
+   },
+   {
+    "year": 2016,
+    "fact": "Smart refrigerators with internal cameras",
+    "stat": "Touchscreen"
+   }
+  ]
+ }
+]

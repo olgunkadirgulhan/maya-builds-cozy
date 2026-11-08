@@ -1,0 +1,50 @@
+name: evolution
+# Evolution of Shorts (2026-11-07; Maya kanalının yeni konsepti, evolution.py). CONTENT_MODE=evolution iken eski DIY shorts.yml kapalı.
+on:
+  schedule:
+    - cron: "13 13-21 * * *"
+  workflow_dispatch:
+    inputs:
+      auto:
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: evolution
+  cancel-in-progress: false
+jobs:
+  make:
+    if: (github.event_name != 'schedule' && !inputs.auto) || vars.CONTENT_MODE == 'evolution'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
+      - run: pip install -q Pillow numpy requests google-api-python-client google-auth
+      - env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PER_DAY: ${{ vars.EVO_PER_DAY || '2' }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.auto }}" = "true" ]; then python evolution.py --auto; else python evolution.py --dry-run; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evolution-${{ github.run_id }}
+          path: out/evo/*.mp4
+          retention-days: 7
+      - name: Kaydı sakla
+        if: always()
+        run: |
+          git config user.name "evo-bot"; git config user.email "bot@users.noreply.github.com"
+          git add state/evo_bank.json state/evo_published.csv 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -qm "evo: kayıt $(date -u +%F-%H%M)"
+          for i in 1 2 3 4 5 6 7 8; do git pull --rebase -q && git push -q && break; sleep $((i*15)); done

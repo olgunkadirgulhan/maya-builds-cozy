@@ -44,7 +44,8 @@ jobs:
 
   make-and-upload:
     needs: guard
-    if: always() && ((github.event_name != 'schedule' && !inputs.auto) || needs.guard.outputs.go == '1')
+    # 2026-11-07: CONTENT_MODE doluysa kanal başka konseptte (evolution.yml) → eski DIY akışı kapalı
+    if: always() && vars.CONTENT_MODE == '' && ((github.event_name != 'schedule' && !inputs.auto) || needs.guard.outputs.go == '1')
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
