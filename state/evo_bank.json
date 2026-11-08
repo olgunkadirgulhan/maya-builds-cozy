@@ -698,5 +698,244 @@
     "stat": "360 sound"
    }
   ]
+ },
+ {
+  "id": "t21",
+  "topic": "Washing Machines",
+  "emoji": "🧺",
+  "steps": [
+   {
+    "year": 1851,
+    "fact": "Hand-cranked drum washers created",
+    "stat": "15 kg"
+   },
+   {
+    "year": 1908,
+    "fact": "Electric motor powered agitator tubs",
+    "stat": "0.5 hp"
+   },
+   {
+    "year": 1937,
+    "fact": "Automatic spin cycles introduced",
+    "stat": "500 rpm"
+   },
+   {
+    "year": 1951,
+    "fact": "Automatic twin tub washers expand",
+    "stat": "800 rpm"
+   },
+   {
+    "year": 1990,
+    "fact": "Microprocessor controlled eco cycles",
+    "stat": "1000 rpm"
+   },
+   {
+    "year": 2020,
+    "fact": "Smart sensors optimize water usage",
+    "stat": "1400 rpm"
+   }
+  ]
+ },
+ {
+  "id": "t22",
+  "topic": "Vacuum Cleaners",
+  "emoji": "🧹",
+  "steps": [
+   {
+    "year": 1860,
+    "fact": "Manual hand-pump carpet sweepers",
+    "stat": "5 kg"
+   },
+   {
+    "year": 1907,
+    "fact": "Portable electric suction cleaners",
+    "stat": "15 kg"
+   },
+   {
+    "year": 1978,
+    "fact": "Cyclonic bagless technology developed",
+    "stat": "8 kg"
+   },
+   {
+    "year": 2002,
+    "fact": "Autonomous robotic vacuums launched",
+    "stat": "3 kg"
+   },
+   {
+    "year": 2020,
+    "fact": "Cordless high-power stick vacuums",
+    "stat": "2 kg"
+   }
+  ]
+ },
+ {
+  "id": "t23",
+  "topic": "Elevators",
+  "emoji": "🛗",
+  "steps": [
+   {
+    "year": 1853,
+    "fact": "Safety brake stops falling cabs",
+    "stat": "1 m/s"
+   },
+   {
+    "year": 1880,
+    "fact": "Electric motors power lift cables",
+    "stat": "2 m/s"
+   },
+   {
+    "year": 1900,
+    "fact": "Push-button automated controls added",
+    "stat": "3 m/s"
+   },
+   {
+    "year": 1950,
+    "fact": "Operatorless automatic doors standard",
+    "stat": "5 m/s"
+   },
+   {
+    "year": 1993,
+    "fact": "High-speed double-deck elevators",
+    "stat": "10 m/s"
+   }
+  ]
+ },
+ {
+  "id": "t24",
+  "topic": "Traffic Lights",
+  "emoji": "🚦",
+  "steps": [
+   {
+    "year": 1868,
+    "fact": "Gas-lit revolving signals used",
+    "stat": "2 colors"
+   },
+   {
+    "year": 1912,
+    "fact": "Electric traffic lights invented",
+    "stat": "2 colors"
+   },
+   {
+    "year": 1920,
+    "fact": "Three-color yellow signal added",
+    "stat": "3 colors"
+   },
+   {
+    "year": 1952,
+    "fact": "Automatic timer systems deployed",
+    "stat": "60 sec cycle"
+   },
+   {
+    "year": 1990,
+    "fact": "Computerized traffic network control",
+    "stat": "24/7 uptime"
+   },
+   {
+    "year": 2010,
+    "fact": "LED signals with countdown timers",
+    "stat": "90% energy cut"
+   }
+  ]
+ },
+ {
+  "id": "t25",
+  "topic": "Ships",
+  "emoji": "🚢",
+  "steps": [
+   {
+    "year": 1807,
+    "fact": "Steam engine powered wooden boats",
+    "stat": "8 km/h"
+   },
+   {
+    "year": 1843,
+    "fact": "Iron hulls with screw propellers",
+    "stat": "15 km/h"
+   },
+   {
+    "year": 1911,
+    "fact": "Diesel engines replace steam power",
+    "stat": "25 km/h"
+   },
+   {
+    "year": 1955,
+    "fact": "Nuclear powered vessels launched",
+    "stat": "40 km/h"
+   },
+   {
+    "year": 1968,
+    "fact": "Specialized container ships expand",
+    "stat": "1000 TEU"
+   }
+  ]
+ },
+ {
+  "id": "t26",
+  "topic": "Tractors",
+  "emoji": "🚜",
+  "steps": [
+   {
+    "year": 1892,
+    "fact": "First gasoline-powered tractor built",
+    "stat": "15 hp"
+   },
+   {
+    "year": 1917,
+    "fact": "Mass-produced light farm tractors",
+    "stat": "20 hp"
+   },
+   {
+    "year": 1939,
+    "fact": "Three-point hitch system introduced",
+    "stat": "30 hp"
+   },
+   {
+    "year": 1960,
+    "fact": "Closed cab with air conditioning",
+    "stat": "100 hp"
+   },
+   {
+    "year": 1990,
+    "fact": "GPS guidance systems for farming",
+    "stat": "200 hp"
+   }
+  ]
+ },
+ {
+  "id": "t27",
+  "topic": "Trains",
+  "emoji": "🚂",
+  "steps": [
+   {
+    "year": 1804,
+    "fact": "Steam locomotive runs on iron rails",
+    "stat": "8 km/h"
+   },
+   {
+    "year": 1881,
+    "fact": "First electric tramway line opens",
+    "stat": "30 km/h"
+   },
+   {
+    "year": 1912,
+    "fact": "Diesel locomotive engine introduced",
+    "stat": "100 km/h"
+   },
+   {
+    "year": 1964,
+    "fact": "High-speed bullet train line starts",
+    "stat": "210 km/h"
+   },
+   {
+    "year": 1981,
+    "fact": "Fast passenger rail breaks records",
+    "stat": "380 km/h"
+   },
+   {
+    "year": 2004,
+    "fact": "Commercial maglev train opens",
+    "stat": "430 km/h"
+   }
+  ]
  }
 ]
