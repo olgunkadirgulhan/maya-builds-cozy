@@ -385,5 +385,318 @@
     "stat": "Touchscreen"
    }
   ]
+ },
+ {
+  "id": "t12",
+  "topic": "Toothbrushes",
+  "emoji": "🪥",
+  "steps": [
+   {
+    "year": 1498,
+    "fact": "Animal hair bristles on bone handles",
+    "stat": "50 g"
+   },
+   {
+    "year": 1938,
+    "fact": "Synthetic nylon bristles replace hair",
+    "stat": "15 g"
+   },
+   {
+    "year": 1954,
+    "fact": "First electric toothbrush invented",
+    "stat": "60 Hz"
+   },
+   {
+    "year": 1992,
+    "fact": "Ultrasonic toothbrushes break down plaque",
+    "stat": "1.6 MHz"
+   },
+   {
+    "year": 2000,
+    "fact": "Rotating heads with timer alerts",
+    "stat": "2 min timer"
+   }
+  ]
+ },
+ {
+  "id": "t13",
+  "topic": "Calculators",
+  "emoji": "🧮",
+  "steps": [
+   {
+    "year": 1642,
+    "fact": "Mechanical gear-based adding machines",
+    "stat": "5 kg"
+   },
+   {
+    "year": 1967,
+    "fact": "First handheld electronic calculator",
+    "stat": "1.1 kg"
+   },
+   {
+    "year": 1972,
+    "fact": "Scientific handheld calculators emerge",
+    "stat": "10 digits"
+   },
+   {
+    "year": 1985,
+    "fact": "Graphing calculators display functions",
+    "stat": "64x96 pixels"
+   },
+   {
+    "year": 2007,
+    "fact": "Calculator apps integrated into phones",
+    "stat": "0 g"
+   }
+  ]
+ },
+ {
+  "id": "t14",
+  "topic": "Batteries",
+  "emoji": "🔋",
+  "steps": [
+   {
+    "year": 1800,
+    "fact": "First chemical battery stack created",
+    "stat": "1.1 V"
+   },
+   {
+    "year": 1859,
+    "fact": "Rechargeable lead-acid batteries",
+    "stat": "2 V"
+   },
+   {
+    "year": 1899,
+    "fact": "Nickel-cadmium rechargeable batteries",
+    "stat": "1.2 V"
+   },
+   {
+    "year": 1960,
+    "fact": "Alkaline dry cell batteries mass produced",
+    "stat": "1.5 V"
+   },
+   {
+    "year": 1991,
+    "fact": "Commercial lithium-ion batteries launched",
+    "stat": "150 Wh/kg"
+   },
+   {
+    "year": 2020,
+    "fact": "Solid-state battery technology advances",
+    "stat": "400 Wh/kg"
+   }
+  ]
+ },
+ {
+  "id": "t15",
+  "topic": "Pens",
+  "emoji": "🖊️",
+  "steps": [
+   {
+    "year": 600,
+    "fact": "Quill pens made from bird feathers",
+    "stat": "2 g"
+   },
+   {
+    "year": 1809,
+    "fact": "Metal nib fountain pens patented",
+    "stat": "20 g"
+   },
+   {
+    "year": 1938,
+    "fact": "Practical ballpoint pen invented",
+    "stat": "0.7 mm"
+   },
+   {
+    "year": 1963,
+    "fact": "Fiber-tipped marker pens gain popularity",
+    "stat": "1.0 mm"
+   },
+   {
+    "year": 1984,
+    "fact": "Gel ink pens provide smooth writing",
+    "stat": "0.5 mm"
+   }
+  ]
+ },
+ {
+  "id": "t16",
+  "topic": "Eyeglasses",
+  "emoji": "👓",
+  "steps": [
+   {
+    "year": 1290,
+    "fact": "Convex lenses for reading in frames",
+    "stat": "+3.0 diopters"
+   },
+   {
+    "year": 1730,
+    "fact": "Temple arms rest over human ears",
+    "stat": "40 g"
+   },
+   {
+    "year": 1784,
+    "fact": "Bifocal lenses combine two focal points",
+    "stat": "2 focal zones"
+   },
+   {
+    "year": 1959,
+    "fact": "Progressive lenses without visible lines",
+    "stat": "3 vision zones"
+   },
+   {
+    "year": 1970,
+    "fact": "Lightweight plastic lenses replace glass",
+    "stat": "50% lighter"
+   },
+   {
+    "year": 2023,
+    "fact": "Smart glasses display digital info",
+    "stat": "50 g"
+   }
+  ]
+ },
+ {
+  "id": "t17",
+  "topic": "Microphones",
+  "emoji": "🎙️",
+  "steps": [
+   {
+    "year": 1876,
+    "fact": "Liquid transmitter microphonic devices",
+    "stat": "100 Hz"
+   },
+   {
+    "year": 1878,
+    "fact": "Carbon button microphones boost signal",
+    "stat": "3 kHz"
+   },
+   {
+    "year": 1928,
+    "fact": "Condenser microphones improve audio",
+    "stat": "15 kHz"
+   },
+   {
+    "year": 1931,
+    "fact": "Dynamic ribbon microphones introduced",
+    "stat": "20 kHz"
+   },
+   {
+    "year": 1964,
+    "fact": "Electret condenser microphones downsized",
+    "stat": "5 mm size"
+   },
+   {
+    "year": 2005,
+    "fact": "MEMS silicon microphones in microchips",
+    "stat": "1 mm size"
+   }
+  ]
+ },
+ {
+  "id": "t18",
+  "topic": "Headphones",
+  "emoji": "🎧",
+  "steps": [
+   {
+    "year": 1910,
+    "fact": "Double-earband audio headset created",
+    "stat": "100 ohms"
+   },
+   {
+    "year": 1958,
+    "fact": "Stereo headphones for home listening",
+    "stat": "400 g"
+   },
+   {
+    "year": 1989,
+    "fact": "Active noise-canceling headsets launched",
+    "stat": "85% noise cut"
+   },
+   {
+    "year": 2004,
+    "fact": "Bluetooth wireless stereo headphones",
+    "stat": "10 m range"
+   },
+   {
+    "year": 2016,
+    "fact": "True wireless earbuds with charging case",
+    "stat": "4 g per earbud"
+   }
+  ]
+ },
+ {
+  "id": "t19",
+  "topic": "Skateboards",
+  "emoji": "🛹",
+  "steps": [
+   {
+    "year": 1950,
+    "fact": "Wooden boards attached to roller skates",
+    "stat": "15 km/h"
+   },
+   {
+    "year": 1963,
+    "fact": "Mass-produced clay-wheeled boards",
+    "stat": "50 mm wheels"
+   },
+   {
+    "year": 1973,
+    "fact": "Urethane wheels revolutionize smooth ride",
+    "stat": "85A hardness"
+   },
+   {
+    "year": 1978,
+    "fact": "Kicktails enable street tricks",
+    "stat": "7.5 inch"
+   },
+   {
+    "year": 1995,
+    "fact": "Double-kick concave decks standard",
+    "stat": "8.0 inch"
+   },
+   {
+    "year": 2013,
+    "fact": "Electric skateboards with remotes",
+    "stat": "40 km/h"
+   }
+  ]
+ },
+ {
+  "id": "t20",
+  "topic": "Speakers",
+  "emoji": "🔊",
+  "steps": [
+   {
+    "year": 1925,
+    "fact": "Dynamic moving-coil speaker patented",
+    "stat": "1 W power"
+   },
+   {
+    "year": 1954,
+    "fact": "Acoustic suspension speaker cabinets",
+    "stat": "50 Hz bass"
+   },
+   {
+    "year": 1970,
+    "fact": "Multi-driver stereo speaker towers",
+    "stat": "100 W power"
+   },
+   {
+    "year": 1998,
+    "fact": "Portable USB-powered desktop speakers",
+    "stat": "5 V power"
+   },
+   {
+    "year": 2011,
+    "fact": "Portable Bluetooth wireless speakers",
+    "stat": "10 hr battery"
+   },
+   {
+    "year": 2015,
+    "fact": "Voice-controlled smart speakers",
+    "stat": "360 sound"
+   }
+  ]
  }
 ]
