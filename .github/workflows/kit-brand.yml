@@ -17,6 +17,10 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
-          BRAND_DESC: "The evolution of everything! 📱🚗✈️\n\nShort, fact-checked timelines of how everyday things changed: phones, cars, airplanes, computers, cameras, bikes and more. Rounded, commonly cited numbers.\n\nNew evolutions every day — comment what we should evolve next!"
-          BRAND_KW: "evolution of,evolution,history of,then and now,technology history,how things changed,timeline,inventions"
+          BRAND_DESC: "Guess the animal by its shadow! 🐾🌅
+
+A new 6-round animal quiz every day, from easy to hard. Pause, guess, and comment your score.
+
+Images: Noto Color Emoji by Google (SIL Open Font License)."
+          BRAND_KW: "guess the animal,animal quiz,shadow quiz,animal shadows,animals,quiz,brain test,silhouette quiz"
         run: python kit_brand.py
